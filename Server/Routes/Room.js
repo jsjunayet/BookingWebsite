@@ -5,8 +5,8 @@ const Roomsrouter = express.Router()
 
 Roomsrouter.post("/:hotelid", CreateRoom)
 Roomsrouter.put("/:id", verifyAdmin, UpdateRoom)
-Roomsrouter.delete("/:id",verifyAdmin, DeletedRoom)
+Roomsrouter.delete("/:id/:hotelid", DeletedRoom)
 Roomsrouter.get("/:id",SingleGetRoom)
 Roomsrouter.get("/",AllGetRoom)
 
-export default hotelsrouter
+export default Roomsrouter

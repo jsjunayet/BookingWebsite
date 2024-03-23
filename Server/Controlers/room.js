@@ -1,5 +1,5 @@
-import Hotel from "../modules/Hotel";
-import Room from "../modules/Room";
+import Hotel from "../modules/Hotel.js";
+import Room from "../modules/Room.js";
 
 export const CreateRoom = async (req,res,next)=>{
     const hotelid = req.params.hotelid;
@@ -50,8 +50,16 @@ export const UpdateRoom = async(req,res,next)=>{
 }
 // Delelted methods
 export const DeletedRoom = async(req,res,next)=>{
+    const hotelid = req.params.hotelid;
     try{
         await Room.findByIdAndDelete(req.params.id)
+        try{
+            await Hotel.findByIdAndUpdate(hotelid,{
+                $pull:{rooms: req.params.id}
+            })
+        }catch(err){
+            next(err)
+        }
          res.status(200).json({messsage:"success full deleted"})
  
      }catch (err){

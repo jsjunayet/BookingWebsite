@@ -5,6 +5,7 @@ import authrouter from "./Routes/Auth.js";
 import hotelsrouter from "./Routes/Hotels.js";
 import cookieParser from "cookie-parser"
 import UserRouter from "./Routes/User.js";
+import Roomsrouter from "./Routes/Room.js";
 const app = express()
 dotenv.config()
 
@@ -22,10 +23,10 @@ const connect = async()=>{
 }
 
 // middleware
-
 app.use("/api/auth", authrouter)
 app.use("/api/hotel", hotelsrouter)
 app.use("/api/user", UserRouter)
+app.use("/api/room", Roomsrouter)
 
 app.use((err,req,res,next)=>{
   const errorStatus = err.status || 500

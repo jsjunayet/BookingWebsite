@@ -14,10 +14,53 @@ export const posthotel = async(req,res,next)=>{
 
 }
 // allhotel get
-export const AllGetHotel = async(req,res,next)=>{
+
+export const AllGetHotel = async (req, res, next) => {
+    const { min, max, ...others } = req.query;
+    console.log(min, max);
+
+    try {
+        // Convert min and max to numbers
+        const minPrice = min !== undefined ? parseInt(min) : 1;
+        const maxPrice = max !== undefined ? parseInt(max) : 999;
+
+        const allHotels = await Hotel.find({ ...others, price: { $gt: minPrice, $lt: maxPrice } }).limit(parseInt(req.query.limit));
+        res.status(200).json(allHotels);
+    } catch (err) {
+        next(err);
+    }
+};
+// count by city
+export const AllGetCountCity = async(req,res,next)=>{
+    const cities = req.query.cities.split(",")
+    console.log(cities)
     try{
-        const allHOtel = await Hotel.find()
-          res.status(200).json(allHOtel)
+        const list = await Promise.all(cities.map(city=>{
+            return Hotel.countDocuments({ city : city})
+        }))
+      
+          res.status(200).json(list)
+      }catch (err){
+        next(err)
+    }
+
+}
+export const AllGetCountTpye = async(req,res,next)=>{
+    
+    try{
+        const hotelCount = await Hotel.countDocuments({type:"hotel"})
+        const apartmentCount = await Hotel.countDocuments({type:"apartment"})
+        const resortCount = await Hotel.countDocuments({type:"resort"})
+        const villasCount = await Hotel.countDocuments({type:"villas"})
+        const cabinCount = await Hotel.countDocuments({type:"cabin"})
+      
+          res.status(200).json([
+            {type: "hotel",count: hotelCount},
+            {type: "apartment",count: apartmentCount},
+            {type: "resort",count: resortCount},
+            {type: "villas",count: villasCount},
+            {type: "cabin",count: cabinCount}
+        ])
       }catch (err){
         next(err)
     }

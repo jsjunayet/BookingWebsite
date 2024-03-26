@@ -12,21 +12,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
 import useFetch from "../../Hook/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
+import { AuthContext } from "../../Context/AuthContext";
+import Reserve from "../../components/Reserve/Reserve";
 
 const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const location = useLocation()
+  const navigate = useNavigate()
   const id = location.pathname.split("hotels/")[1]
-  console.log(id)
-  console.log(location)
   const [open, setOpen] = useState(false);
+  const [openModel, setOpenModel] = useState(false);
   const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel/get/${id}`)
-  const { city, dates, options } = useContext(SearchContext)
+  const { dates, options } = useContext(SearchContext)
+  const { user } = useContext(AuthContext)
   console.log(options);
   const dayDifferent = (date1, date2) => {
-    // Convert string dates to Date objects
     const endDate = new Date(date1);
     const startDate = new Date(date2);
 
@@ -39,8 +41,13 @@ const Hotel = () => {
   const differenceInDays = dates[0]?.endDate && dates[0]?.startDate ?
     dayDifferent(dates[0]?.endDate, dates[0]?.startDate) :
     0;
-
-
+  const handleClick = () => {
+    if (user) {
+      setOpenModel(true)
+    } else {
+      navigate("/login")
+    }
+  }
 
 
   const photos = [
@@ -160,10 +167,13 @@ const Hotel = () => {
                 <h2>
                   <b>${data.price * options.room * differenceInDays}</b> ({differenceInDays}-night)
                 </h2>
-                <button>Reserve or Book Now!</button>
+                <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
             </div>
           </div>
+          {
+            openModel && <Reserve isopen={setOpenModel} hoteId={id}></Reserve>
+          }
           <MailList />
           <Footer />
         </div>

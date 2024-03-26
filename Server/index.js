@@ -29,7 +29,6 @@ app.use("/api/auth", authrouter)
 app.use("/api/hotel", hotelsrouter)
 app.use("/api/user", UserRouter)
 app.use("/api/room", Roomsrouter)
-
 app.use((err,req,res,next)=>{
   const errorStatus = err.status || 500
   const errorMassage = err.message || "some thing is wrong"

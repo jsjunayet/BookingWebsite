@@ -4,6 +4,6 @@ const authrouter = express.Router()
 
 
 authrouter.post("/resistor",Resistor)
-authrouter.get("/login",Login)
+authrouter.post("/login",Login)
 
 export default authrouter

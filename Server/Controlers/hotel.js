@@ -1,5 +1,7 @@
+
 import { createError } from "../Utiltes/CreateError.js"
 import Hotel from "../modules/Hotel.js"
+import Room from "../modules/Room.js"
 
 // post methos
 export const posthotel = async(req,res,next)=>{
@@ -96,4 +98,16 @@ export const DeletedHotel = async(req,res,next)=>{
         next(err)
     }
 
+}
+export const GetHotelRoom = async(req,res,next)=>{
+    try{
+        const hotel = await Hotel.findById(req.params.id)
+        const list = await Promise.all(hotel.rooms.map((room)=>{
+            return Room.findById(room)
+        }))
+        res.status(200).json(list)
+
+    }catch(err){
+        next(err)
+    }
 }

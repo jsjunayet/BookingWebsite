@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
 import { AuthContext } from "../../Context/AuthContext";
 import Reserve from "../../components/Reserve/Reserve";
+import Loading from "../../components/Loading/Loading";
 
 const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -89,11 +90,13 @@ const Hotel = () => {
   };
 
   return (
-    <div>
+    <div className="relative">
       <Navbar />
       <Header type="list" />
-      {
-        loading ? <p>Please Wait</p> : <div className="hotelContainer">
+      {loading ? (
+        <Loading></Loading>
+      ) : (
+        <div className="hotelContainer flex justify-center">
           {open && (
             <div className="slider">
               <FontAwesomeIcon
@@ -116,6 +119,13 @@ const Hotel = () => {
               />
             </div>
           )}
+          <div className="">
+            {openModel && (
+              <div className="fixed inset-0 my-3 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+                <Reserve isopen={setOpenModel} hoteId={id}></Reserve>
+              </div>
+            )}
+          </div>
           <div className="hotelWrapper">
             <button className="bookNow">Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data?.city}</h1>
@@ -123,9 +133,7 @@ const Hotel = () => {
               <FontAwesomeIcon icon={faLocationDot} />
               <span>Elton St 125 New york</span>
             </div>
-            <span className="hotelDistance">
-              {data?.desc}
-            </span>
+            <span className="hotelDistance">{data?.desc}</span>
             <span className="hotelPriceHighlight">
               Book a stay over ${data?.price} at this property and get a free airport taxi
             </span>
@@ -171,14 +179,12 @@ const Hotel = () => {
               </div>
             </div>
           </div>
-          {
-            openModel && <Reserve isopen={setOpenModel} hoteId={id}></Reserve>
-          }
           <MailList />
           <Footer />
         </div>
-      }
+      )}
     </div>
+
   );
 };
 

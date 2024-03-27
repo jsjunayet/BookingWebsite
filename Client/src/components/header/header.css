@@ -1,15 +1,15 @@
 .header {
-  background-color: #003580;
   color: white;
   display: flex;
   justify-content: center;
   position: relative;
+
 }
 
 .headerContainer {
   width: 100%;
   max-width: 1024px;
-  margin: 20px 0px 100px 0px;
+  margin: 20px 0px 80px 0px;
 }
 
 .headerContainer.listMode {
@@ -19,7 +19,6 @@
 .headerList {
   display: flex;
   gap: 40px;
-  margin-bottom: 50px;
 }
 
 .headerListItem {
@@ -54,10 +53,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 10px 0px;
+  padding: 25px 0px;
   border-radius: 5px;
   position: absolute;
-  bottom: -25px;
+  bottom: 80px;
   width: 100%;
   max-width: 1024px;
 }
@@ -71,10 +70,10 @@
   align-items: center;
   gap: 10px;
 }
-
 .headerSearchInput {
   border: none;
   outline: none;
+  color: gray;
 }
 
 .headerSearchText {

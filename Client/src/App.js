@@ -8,6 +8,7 @@ import Hotel from "./pages/hotel/Hotel";
 import List from "./pages/list/List";
 import Login from "./components/Login/Login";
 import Resistors from "./components/Login/Resistors";
+import "./index.css"
 
 function App() {
   return (

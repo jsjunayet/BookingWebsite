@@ -1,32 +1,34 @@
 import useFetch from "../../Hook/useFetch";
+import Loading from "../Loading/Loading";
 import "./featuredProperties.css";
+import { FaLocationDot } from "react-icons/fa6";
 
 const FeaturedProperties = () => {
   const { data, loading, error, refetch } = useFetch('http://localhost:5000/api/hotel?feautre=true')
   return (
-    <div className="fp">
+    <div className=" max-w-5xl mx-auto">
       {
-        loading ? <p>Please Wait</p> :
-          <>
+        loading ? <Loading></Loading> :
+          <div className=" grid grid-cols-1 md:grid-cols-3 gap-4 lg:grid-cols-4">
             {
               data.map((item) => (
-                <div className="fpItem">
+                <div className=" bg-base-200 p-5">
                   <img
                     src={item?.photos[0]}
                     alt=""
-                    className="fpImg"
+                    className=""
                   />
-                  <span className="fpName">{item.title}</span>
-                  <span className="fpCity">{item.city}</span>
-                  <span className="fpPrice">Starting from ${item.price}</span>
-                  <div className="fpRating">
+                  <p className="">{item.title}</p>
+                  <p className=""><FaLocationDot /> {item.city}</p>
+                  <p className="">Starting from ${item.price}</p>
+                  <div className="">
                     <button>{item.rating}</button>
                     <span>Excellent</span>
                   </div>
                 </div>
               ))
             }
-          </>
+          </div>
       }
     </div>
   );

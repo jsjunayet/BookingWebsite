@@ -1,10 +1,7 @@
 import {
   faBed,
   faCalendarDays,
-  faCar,
   faPerson,
-  faPlane,
-  faTaxi,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
@@ -16,6 +13,9 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
 import { da } from "date-fns/locale";
+import img1 from "../../assest/bannar.jpg"
+import img2 from "../../assest/img1.jpg"
+import img3 from "../../assest/romm.jpg"
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
@@ -56,38 +56,26 @@ const Header = ({ type }) => {
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-        <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Attractions</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport taxis</span>
-          </div>
-        </div>
         {type !== "list" && (
           <>
-            <h1 className="headerTitle">
-              A lifetime of discounts? It's Genius.
-            </h1>
-            <p className="headerDesc">
-              Get rewarded for your travels – unlock instant savings of 10% or
-              more with a free Lamabooking account
-            </p>
-            <button className="headerBtn">Sign in / Register</button>
+            <div className="flex gap-[100px]">
+              <div className="  pt-24 w-[45%]">
+                <h1 class="text-6xl font-bold text-gray-900 leading-tight tracking-tight">Welcome to Online Booking</h1>
+
+                <p className=" text-gray-400 pt-12">"Explore a curated collection of hotels, resorts, and villas with Online Booking. Find your ideal stay that fits your preferences and budget effortlessly."</p>
+              </div>
+              <div className="w-[45%] text-black">
+                <div className="flex gap-2 pt-24">
+                  <div className="w-[50%] space-y-2">
+                    <img src={img1} className=" h-44 rounded" alt="" />
+                    <img src={img2} className=" h-44 rounded" alt="" />
+                  </div>
+                  <div className="w-[50%]">
+                    <img src={img3} className="h-[360px] rounded" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />

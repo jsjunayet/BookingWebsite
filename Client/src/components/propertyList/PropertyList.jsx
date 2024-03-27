@@ -1,4 +1,5 @@
 import useFetch from "../../Hook/useFetch";
+import Loading from "../Loading/Loading";
 import "./propertyList.css";
 
 const PropertyList = () => {
@@ -13,7 +14,7 @@ const PropertyList = () => {
   return (
     <div className="pList">
       {
-        loading ? <p>Please Waiting...</p> : <>
+        loading ? <Loading></Loading> : <>
 
           {
             images.map((img, i) => (

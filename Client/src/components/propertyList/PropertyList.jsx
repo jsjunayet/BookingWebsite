@@ -1,6 +1,7 @@
 import useFetch from "../../Hook/useFetch";
 import Loading from "../Loading/Loading";
 import "./propertyList.css";
+import Marquee from "react-fast-marquee";
 
 const PropertyList = () => {
   const { data, loading, error, refetch } = useFetch('http://localhost:5000/api/hotel/countBytype')
@@ -12,28 +13,33 @@ const PropertyList = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg"
   ]
   return (
-    <div className="pList">
-      {
-        loading ? <Loading></Loading> : <>
+    <div className=" max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-5 grid-cols-2 gap-2">
+        {
+          loading ? <Loading></Loading> : (
 
-          {
-            images.map((img, i) => (
-              <div key={i} className="pListItem">
-                <img
-                  src={img}
-                  alt=""
-                  className="pListImg"
-                />
-                <div className="pListTitles">
-                  <h1>{data[i]?.type}</h1>
-                  <h2>{data[i]?.count} {data[i]?.type} </h2>
-                </div>
-              </div>
+            <>
+              {
+                images.map((img, i) => (
 
-            ))
-          }
-        </>
-      }
+                  <div key={i} className="pListItem">
+                    <img
+                      src={img}
+                      alt=""
+                      className="pListImg"
+                    />
+                    <div className="pListTitles mt-2">
+                      <h1>{data[i]?.type}</h1>
+                      <h2>{data[i]?.count} {data[i]?.type} </h2>
+                    </div>
+                  </div>
+
+
+                ))
+              }
+            </>
+          )}
+      </div>
     </div>
   );
 };

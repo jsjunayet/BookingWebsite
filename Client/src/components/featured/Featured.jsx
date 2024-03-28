@@ -5,41 +5,56 @@ import "./featured.css";
 const Featured = () => {
   const { data, loading, error, refetch } = useFetch("http://localhost:5000/api/hotel/countByCity?cities=dhaka,shikarpur,savar")
   return (
-    <div className="featured">
+    <div className=" max-w-5xl mx-auto">
       {
         loading ? <Loading></Loading> : <>
-          <div className="featuredItem">
-            <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
-              alt=""
-              className="featuredImg"
-            />
-            <div className="featuredTitles">
-              <h1>Dhaka</h1>
-              <h2>{data[0]} properties</h2>
-            </div>
-          </div>
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+              <img
+                src="https://i.ibb.co/4dCxkd0/dhaka.jpg"
+                alt=""
+                className="w-full h-full object-cover rounded-xl"
+              />
+              <div className=" absolute top-0 left-0 w-full h-full bg-[#213c4538] backdrop-blur-sm rounded-xl flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <h1 className="text-white">Dhaka</h1>
+                <h2 className="text-white font-bold">{data[0]} properties</h2>
+              </div>
 
-          <div className="featuredItem">
-            <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/690334.webp?k=b99df435f06a15a1568ddd5f55d239507c0156985577681ab91274f917af6dbb&o="
-              alt=""
-              className="featuredImg"
-            />
-            <div className="featuredTitles">
-              <h1>Shikarpur</h1>
-              <h2>{data[1]} properties</h2>
             </div>
-          </div>
-          <div className="featuredItem">
-            <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/689422.webp?k=2595c93e7e067b9ba95f90713f80ba6e5fa88a66e6e55600bd27a5128808fdf2&o="
-              alt=""
-              className="featuredImg"
-            />
-            <div className="featuredTitles">
-              <h1>Savar</h1>
-              <h2>{data[1]} properties </h2>
+            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+              <img
+                src="https://i.ibb.co/gZwGRLv/Rajshahi.jpg"
+                alt=""
+                className="w-full h-full object-cover rounded-xl"
+              />
+              <div className=" absolute top-0 left-0 w-full h-full bg-[#213c4538] backdrop-blur-sm rounded-xl flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <h1 className="text-white">Rajshahi </h1>
+                <h2 className="text-white font-bold">{data[1]} properties</h2>
+              </div>
+            </div>
+            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+              <img
+                src="https://i.ibb.co/5BzTj9R/Cumilla.jpg"
+                alt=""
+                className="w-full h-full object-cover rounded-xl"
+              />
+              <div className=" absolute top-0 left-0 w-full h-full bg-[#213c4538] backdrop-blur-sm rounded-xl flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <h1 className="text-white ">Cumilla</h1>
+                <h2 className="text-white font-bold">{data[2]} properties</h2>
+              </div>
+            </div>
+
+            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+              <img
+                src="https://i.ibb.co/BrM8jnD/Coxs-Bazar.jpg"
+                alt=""
+                className="w-full h-full object-cover rounded-xl"
+              />
+              <div className=" absolute top-0 left-0 w-full h-full bg-[#213c4538] backdrop-blur-sm rounded-xl flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <h1 className="text-white">Cox's Bazar</h1>
+                <h2 className="text-white font-bold">{data[0]} properties</h2>
+              </div>
+
             </div>
           </div>
         </>

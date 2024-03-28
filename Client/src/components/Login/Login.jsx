@@ -36,11 +36,11 @@ const Login = () => {
         }
     }
     return (
-        <div className="bg-slate-900 flex items-center px-3 justify-center min-h-screen text-white">
+        <div className=" flex items-center px-3 justify-center min-h-screen text-gray-800">
             <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
                 <div className="flex dark:text-white flex-col justify-center items-center">
                     <div className=" mt-2 mb-7 text-center">
-                        <h1 className="mb-2 text-white text-3xl font-bold">
+                        <h1 className="mb-2 text-gray-800 text-3xl font-bold">
                             Log in to your account
                         </h1>
                         <h4 className="text-base">
@@ -57,7 +57,7 @@ const Login = () => {
                                 type="email"
                                 name="email"
                                 id="email"
-                                placeholder="Username"
+                                placeholder="userEmail"
                                 className="w-full py-1 px-2 rounded bg-gray-300 border-none focus:bg-gray-600 text-black pl-10"
                             />
                         </div>
@@ -88,7 +88,7 @@ const Login = () => {
                     {
                         error && <p className=" text-red-600 mt-2">{error}</p>
                     }
-                    <div className="flex justify-between mt-2">
+                    <div className="flex justify-between mt-2 text-white">
                         <p>Please Create account</p>
                         <Link to="/resistor">SignUp</Link>
                     </div>

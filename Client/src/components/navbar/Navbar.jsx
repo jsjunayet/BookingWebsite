@@ -13,7 +13,9 @@ const Navbar = () => {
   const { user, dispatch, loading, error } = useContext(AuthContext)
   const location = useLocation()
 
-  const handleform = () => {
+  const handleout = () => {
+    localStorage.removeItem("USER")
+    dispatch({ type: "LOGOUT" })
   }
   const Links = [
     {
@@ -138,7 +140,10 @@ const Navbar = () => {
           <div className=" md:block hidden">
             <MdOutlineLightMode className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
           </div>
-          <Link to="/login"><button className="rounded-lg bg-[#005C99] text-white font-semibold px-4 py-1">Login</button></Link>
+          {
+            user ? <Link onClick={handleout}><button className="rounded-lg bg-[#005C99] text-white font-semibold px-4 py-1">LogOut</button></Link>
+              : <Link to="/login"><button className="rounded-lg bg-[#005C99] text-white font-semibold px-4 py-1">Login</button></Link>
+          }
         </ul>
       </div>
     </motion.nav>

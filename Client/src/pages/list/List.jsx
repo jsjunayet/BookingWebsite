@@ -31,8 +31,7 @@ const List = () => {
   return (
     <div className={` ${Dark === "light" ? "" : "bg-[#060417] text-white"} min-h-screen`}>
       <Navbar />
-      <Header type="list" />
-      <div className=" max-w-5xl mx-auto px-4 pt-10">
+      <div className=" max-w-5xl mx-auto px-4 pt-20">
         <div className="md:flex gap-8 ">
           <div className="bg-[#005C99] mb-5 md:mb-0 sticky h-[520px]  md:w-[35%] w-full p-4 rounded">
             <h1 className="text-lg text-gray-200 pt-3">Search</h1>

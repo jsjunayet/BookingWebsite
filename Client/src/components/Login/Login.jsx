@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import { Link } from "react-router-dom";
+import { ThemContext } from "../../Context/ThemContext";
 
 
 const Login = () => {
@@ -35,12 +36,13 @@ const Login = () => {
 
         }
     }
+    const { Dark } = useContext(ThemContext)
     return (
-        <div className=" flex items-center px-3 justify-center min-h-screen text-gray-800">
+        <div className={`flex items-center px-3 justify-center min-h-screen text-gray-800 ${Dark === "light" ? "" : "bg-[#060417] text-white"}`}>
             <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
                 <div className="flex dark:text-white flex-col justify-center items-center">
                     <div className=" mt-2 mb-7 text-center">
-                        <h1 className="mb-2 text-gray-800 text-3xl font-bold">
+                        <h1 className={`mb-2 text-3xl font-bold ${Dark === "light" ? "text-gray-900" : " text-gray-100"}`}>
                             Log in to your account
                         </h1>
                         <h4 className="text-base">

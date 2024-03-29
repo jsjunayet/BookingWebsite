@@ -1,41 +1,45 @@
-import "./searchItem.css";
+import { FcRating } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 
 const SearchItem = ({ item }) => {
   return (
-    <div className="searchItem">
+    <div className="border border-gray-300 rounded p-4 flex flex-col md:flex-row md:items-center md:justify-between md:gap-8 mb-8">
       <img
-        src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
+        src={item?.photos[0]}
         alt=""
-        className="siImg"
+        className="w-full lg:w-52 h-[270px] object-cover mb-4 md:mb-0 rounded-lg"
       />
-      <div className="siDesc">
-        <h1 className="siTitle">{item?.city}</h1>
-        <span className="siDistance">500m from center</span>
-        <span className="siTaxiOp">Free airport taxi</span>
-        <span className="siSubtitle">
-          Studio Apartment with Air conditioning
+      <div className="flex flex-col gap-2 flex-1 md:flex-none md:w-[350px] w-full">
+        <div className='flex justify-between'>
+          <h1 className="text-lg text-blue-600 ">{item?.city}</h1>
+          <div className="flex items-center">
+            <FcRating className='text-xl' />
+            <button className=" text-orange-300 inline-block text-xl py-1 px-3 font-bold">{item?.rating}</button>
+          </div>
+        </div>
+        <span className="text-sm">{item?.distance}</span>
+        <span className="bg-green-600 text-white w-[150px] inline-block text-xs py-1 px-3 rounded">
+          Free airport taxi
         </span>
-        <span className="siFeatures">
-          {item?.desc}
-        </span>
-        <span className="siCancelOp">Free cancellation </span>
-        <span className="siCancelOpSubtitle">
+        <span className="font-bold text-sm">{item.title}</span>
+        <span className="text-sm">{item?.desc}</span>
+        <span className="text-green-600 font-bold text-sm">Free cancellation </span>
+        <span className="text-green-600 text-sm">
           You can cancel later, so lock in this great price today!
         </span>
-      </div>
-      <div className="siDetails">
-        <div className="siRating">
-          <span>Excellent</span>
-          <button>{item?.rating}</button>
+        <div className="flex justify-between items-center">
+          <div className='flex gap-[3px] items-center '>
+            <span className="text-xl text-semibold">${item?.price}</span>
+            <span className="text-xs text-gray-400">(Includes taxes and fees)</span>
+          </div>
+          <Link to={`/hotels/${item._id}`}><button className="bg-blue-600 text-white font-bold py-2 px-4 rounded">Details</button></Link>
         </div>
-        <div className="siDetailTexts">
-          <span className="siPrice">${item?.price}</span>
-          <span className="siTaxOp">Includes taxes and fees</span>
-          <Link to={`/hotels/${item._id}`}><button className="siCheckButton">See availability</button></Link>
-        </div>
+
       </div>
-    </div>
+
+
+
+    </div >
   );
 };
 

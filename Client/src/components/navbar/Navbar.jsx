@@ -8,9 +8,17 @@ import { MdDashboard } from "react-icons/md";
 import { AuthContext } from "../../Context/AuthContext";
 import NavLink from "./NavLink";
 import { MdOutlineLightMode } from "react-icons/md";
+import { ImProfile } from "react-icons/im";
+import { ThemContext } from "../../Context/ThemContext";
+import { MdOutlineDarkMode } from "react-icons/md";
 
 const Navbar = () => {
   const { user, dispatch, loading, error } = useContext(AuthContext)
+  const { Dark, setDark } = useContext(ThemContext)
+  const handleChange = () => {
+    setDark((prev) => prev === "light" ? "dark" : "light")
+  }
+  console.log(Dark)
   const location = useLocation()
 
   const handleout = () => {
@@ -23,12 +31,6 @@ const Navbar = () => {
       path: "/",
       title: "Home",
       icon: <IoIosHome />,
-    },
-    {
-      id: 2,
-      path: "/contact",
-      title: "Contact",
-      icon: <MdOutlineContactPhone />,
     }
   ];
 
@@ -66,7 +68,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 w-full z-50  ${isScrolled ? 'bg-gray-800' : ' bg-transparent'}`}
+      className={`fixed top-0 left-0 w-full z-50  ${isScrolled ? 'bg-[#060417]' : ' bg-transparent'}`}
       animate={controls}
       initial={{ opacity: 1, y: 0 }}
     >
@@ -82,7 +84,7 @@ const Navbar = () => {
           </Link>
 
           <div className="block ml-20 md:hidden">
-            <MdOutlineLightMode className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
+            <MdOutlineLightMode onClick={handleChange} className={`text-2xl ${Dark === "light" ? "" : "text-white"} cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
           </div>
           <div className="md:hidden ml-2">
             <motion.div
@@ -92,9 +94,9 @@ const Navbar = () => {
               whileTap={{ scale: 0.9 }}
             >
               {open ? (
-                <FiX onClick={closeMenu} className={`text-2xl  ${isScrolled ? 'text-white' : ' text-black'}`} />
+                <FiX onClick={closeMenu} className={`text-2xl ${Dark === "light" ? "text-black" : "text-white"}  ${isScrolled ? 'text-white' : ' text-black'}`} />
               ) : (
-                <FiMenu className={`text-2xl  ${isScrolled ? 'text-white' : ' text-black'}`} />
+                <FiMenu className={`text-2xl ${Dark === "light" ? "text-black" : "text-white"} ${isScrolled ? 'text-white' : ' text-black'}`} />
               )}
             </motion.div>
           </div>
@@ -137,12 +139,32 @@ const Navbar = () => {
               )}
             </div>
           </Link>} */}
+          {user && <Link to='/profile'>
+            <div className={`flex items-center text-white hover:text-gray-300 transition duration-300 relative relative-group`}>
+              <span className="mr-1"><ImProfile /></span>
+              Profile
+              {location.pathname === "/profile" && (
+                <>
+                  <motion.div
+                    className="absolute font-poppin bottom-0  left-0 w-full h-[2px] bg-gradient-to-r from-[#3182CE] via-[#93C5FD] to-[#3182CE] -mb-1"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.9 }}
+                  />
+                </>
+              )}
+            </div>
+          </Link>}
           <div className=" md:block hidden">
-            <MdOutlineLightMode className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
+            {
+              Dark === "light" ? <MdOutlineLightMode onClick={handleChange} className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} /> :
+                <MdOutlineDarkMode onClick={handleChange} className={`text-2xl ${Dark === "light" ? "" : "text-white"} cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
+            }
           </div>
           {
-            user ? <Link onClick={handleout}><button className="rounded-lg bg-[#005C99] text-white font-semibold px-4 py-1">LogOut</button></Link>
-              : <Link to="/login"><button className="rounded-lg bg-[#005C99] text-white font-semibold px-4 py-1">Login</button></Link>
+            user ? <Link onClick={handleout}><button className="rounded-lg bg-[#005C99] mt-2 md:mt-0
+             text-white font-semibold px-4 py-1">LogOut</button></Link>
+              : <Link to="/login"><button className="rounded-lg mt-2 md:mt-0 bg-[#005C99] text-white font-semibold px-4 py-1">Login</button></Link>
           }
         </ul>
       </div>

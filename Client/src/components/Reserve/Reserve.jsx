@@ -4,8 +4,12 @@ import axios, { all } from 'axios';
 import { useContext, useState } from "react";
 import { SearchContext } from "../../Context/SearchContext";
 import Loading from "../Loading/Loading";
+import { FaFilterCircleXmark } from "react-icons/fa6";
+import { ThemContext } from "../../Context/ThemContext";
+import { MdMeetingRoom } from "react-icons/md";
 
 const Reserve = ({ isopen, hoteId }) => {
+    const { Dark } = useContext(ThemContext)
     const [selected, setSelected] = useState([]);
     const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel/room/${hoteId}`);
     const { dates } = useContext(SearchContext);
@@ -54,39 +58,44 @@ const Reserve = ({ isopen, hoteId }) => {
     };
 
     return (
-        <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
+        <div className={`p-6 rounded-lg shadow-lg ${Dark === "light" ? "bg-base-100" : "bg-[#060417] "}`}>
             {loading ? (
                 <Loading></Loading>
             ) : (
                 <div>
                     <button onClick={() => isopen(false)} className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 focus:outline-none">
-                        <IoMdCloseCircle className="w-6 h-6 text-black" />
+                        <IoMdCloseCircle className="w-6 h-6 text-white" />
                     </button>
-                    <div className="space-y-4 gap-4 grid md:grid-cols-2 grid-cols-2">
-                        {data.map((room) => (
-                            <div key={room._id} className="border-b pb-4">
-                                <h2 className="text-xl font-semibold">{room?.title}</h2>
-                                <p className="text-gray-600">{room?.desc}</p>
-                                <p className="text-gray-600">Max People: {room?.maxPeople}</p>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                    {room?.roomNumbers.map((roomNumber) => (
-                                        <div key={roomNumber._id} className="flex items-center">
-                                            <label className="mr-2">{roomNumber?.number}</label>
-                                            <input
-                                                type="checkbox"
-                                                disabled={!isAvailable(roomNumber)}
-                                                value={roomNumber._id}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                    ))}
+                    {
+                        data.length == "0" ? <div className=" min-h-[100vh-200px] flex flex-col justify-center items-center">
+                            <MdMeetingRoom className={` text-8xl ${Dark === "light" ? "text-[#060417]" : " text-white"}`} />
+                            <p className={`text-xl font-semibold ${Dark === "light" ? "text-[#060417]" : " text-white"}`}>"Please check another Room, as there are no rooms available here."</p>
+                        </div> : <div className="space-y-4 gap-4 grid md:grid-cols-2 grid-cols-2">
+                            {data.map((room) => (
+                                <div key={room._id} className="border-b pb-4">
+                                    <h2 className="text-xl font-semibold">{room?.title}</h2>
+                                    <p className="text-gray-600">{room?.desc}</p>
+                                    <p className="text-gray-600">Max People: {room?.maxPeople}</p>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                        {room?.roomNumbers.map((roomNumber) => (
+                                            <div key={roomNumber._id} className="flex items-center">
+                                                <label className="mr-2">{roomNumber?.number}</label>
+                                                <input
+                                                    type="checkbox"
+                                                    disabled={!isAvailable(roomNumber)}
+                                                    value={roomNumber._id}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <button onClick={handleClick} className="mt-2 bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none">
+                                        Reserve
+                                    </button>
                                 </div>
-                                <button onClick={handleClick} className="mt-2 bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none">
-                                    Reserve
-                                </button>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    }
                 </div>
             )}
         </div>

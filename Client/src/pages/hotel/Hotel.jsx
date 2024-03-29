@@ -17,6 +17,7 @@ import { SearchContext } from "../../Context/SearchContext";
 import { AuthContext } from "../../Context/AuthContext";
 import Reserve from "../../components/Reserve/Reserve";
 import Loading from "../../components/Loading/Loading";
+import { ThemContext } from "../../Context/ThemContext";
 
 const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -49,7 +50,7 @@ const Hotel = () => {
       navigate("/login")
     }
   }
-
+  const { Dark } = useContext(ThemContext)
 
   const photos = [
     {
@@ -90,7 +91,7 @@ const Hotel = () => {
   };
 
   return (
-    <div className="relative">
+    <div className={`relative pt-10 ${Dark === "light" ? "" : "bg-[#060417] text-white"}`}>
       <Navbar />
       <Header type="list" />
       {loading ? (
@@ -127,7 +128,7 @@ const Hotel = () => {
             )}
           </div>
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
+            <button onClick={handleClick} className="bookNow">Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data?.city}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
@@ -168,19 +169,17 @@ const Hotel = () => {
               </div>
               <div className="hotelDetailsPrice">
                 <h1>Perfect for a {differenceInDays}-night stay!</h1>
-                <span>
+                <span className={`${Dark === "light" ? "" : "text-[#060417]"}`}>
                   Located in the real heart of Krakow, this property has an
                   excellent location score of 9.8!
                 </span>
-                <h2>
-                  <b>${data.price * options.room * differenceInDays}</b> ({differenceInDays}-night)
+                <h2 className={`${Dark === "light" ? "" : "text-[#060417]"}`}>
+                  <b className="font-bold">${data.price * options.room * differenceInDays}</b> ({differenceInDays}-night)
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
             </div>
           </div>
-          <MailList />
-          <Footer />
         </div>
       )}
     </div>

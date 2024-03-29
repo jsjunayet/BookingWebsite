@@ -16,10 +16,12 @@ import { da } from "date-fns/locale";
 import img1 from "../../assest/bannar.jpg"
 import img2 from "../../assest/img1.jpg"
 import img3 from "../../assest/romm.jpg"
+import { ThemContext } from "../../Context/ThemContext";
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
+  const { Dark } = useContext(ThemContext)
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -58,9 +60,9 @@ const Header = ({ type }) => {
       >
         {type !== "list" && (
           <>
-            <div className="flex gap-[100px]">
+            <div className="md:flex hidden md::block gap-[100px]">
               <div className="  pt-24 w-[45%]">
-                <h1 class="text-6xl font-bold text-gray-900 leading-tight tracking-tight">Welcome to Online Booking</h1>
+                <h1 class={`text-6xl font-bold  leading-tight tracking-tight ${Dark === "light" ? "text-gray-900" : " text-gray-200"}`}>Welcome to Online Booking</h1>
 
                 <p className=" text-gray-400 pt-12">"Explore a curated collection of hotels, resorts, and villas with Online Booking. Find your ideal stay that fits your preferences and budget effortlessly."</p>
               </div>
@@ -76,8 +78,8 @@ const Header = ({ type }) => {
                 </div>
               </div>
             </div>
-            <div className="headerSearch">
-              <div className="headerSearchItem">
+            <div className="w-full md:absolute bottom-10 mt-20 gap-2  md:mt-0 md:h-[30px] space-y-8 md:space-y-0 bg-white border-[3px] border-[#febb02] md:flex flex flex-col md:flex-row  justify-center md:justify-around items-center py-6 px-0 max-w-5xl ">
+              <div className="md:w-[28%] md:border-none border-b-2 gap-2 border-gray-200 w-full text-center flex items-center  justify-center pb-4 md:pb-0">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
                 <input
                   type="text"
@@ -86,7 +88,7 @@ const Header = ({ type }) => {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
-              <div className="headerSearchItem">
+              <div className="md:w-[28%] md:border-none border-b-2 gap-2 border-gray-200 w-full text-center flex items-center  justify-center pb-4 md:pb-0 ">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
                   onClick={() => setOpenDate(!openDate)}
@@ -106,7 +108,7 @@ const Header = ({ type }) => {
                   />
                 )}
               </div>
-              <div className="headerSearchItem">
+              <div className="md:w-[28%] md:border-none border-b-2 border-gray-200 w-full gap-2 text-center flex items-center  justify-center pb-4 md:pb-0">
                 <FontAwesomeIcon icon={faPerson} className="headerIcon" />
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
@@ -180,8 +182,8 @@ const Header = ({ type }) => {
                   </div>
                 )}
               </div>
-              <div className="headerSearchItem">
-                <button className="headerBtn" onClick={handleSearch}>
+              <div className="w-full md:w-[15%] text-end">
+                <button className="w-full md:w-[120px] h-[50px] bg-[#0071c2] px-4 py-2 rounded-lg" onClick={handleSearch}>
                   Search
                 </button>
               </div>

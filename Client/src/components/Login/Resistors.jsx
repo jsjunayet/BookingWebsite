@@ -4,10 +4,12 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom"
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import { RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
+import { ThemContext } from "../../Context/ThemContext";
 
 
 
 const Registers = () => {
+    const { Dark } = useContext(ThemContext)
     // const [Credentails, setCredentails] = useState({
     //     userEmail: undefined,
     //     password: undefined
@@ -40,15 +42,15 @@ const Registers = () => {
         }
     }
     return (
-        <div className=" flex items-center px-3 justify-center min-h-screen text-gray-800">
+        <div className={`flex items-center px-3 justify-center min-h-screen text-gray-800 ${Dark === "light" ? "" : " bg-gray-900"}`}>
             <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
                 <div className="flex dark:text-white flex-col justify-center items-center">
                     <div className=" mt-2 mb-7 text-center">
-                        <h1 className="mb-2 text-gray-800 text-3xl font-bold">
+                        <h1 className={`mb-2  text-3xl font-bold ${Dark === "light" ? "bg-[#060417]" : " text-gray-100"}`}>
                             Create a free account
                         </h1>
                         <h4 className="text-base">
-                            <span className="opacity-75">Or</span>{" "}
+                            <span className="">Or</span>{" "}
                             <Link to="/login"> <span className="text-blue-500">Already Account</span></Link>
                         </h4>
                     </div>

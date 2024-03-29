@@ -3,7 +3,7 @@ import Loading from "../Loading/Loading";
 import "./featured.css";
 
 const Featured = () => {
-  const { data, loading, error, refetch } = useFetch("http://localhost:5000/api/hotel/countByCity?cities=dhaka,shikarpur,savar")
+  const { data, loading, error, refetch } = useFetch("http://localhost:5000/api/hotel/countByCity?cities=Dhaka,Cumilla,Rajshahi,Cox's Bazar")
   return (
     <div className=" max-w-5xl mx-auto">
       {
@@ -52,7 +52,7 @@ const Featured = () => {
               />
               <div className=" absolute top-0 left-0 w-full h-full bg-[#213c4538] backdrop-blur-sm rounded-xl flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100">
                 <h1 className="text-white">Cox's Bazar</h1>
-                <h2 className="text-white font-bold">{data[0]} properties</h2>
+                <h2 className="text-white font-bold">{data[3]} properties</h2>
               </div>
 
             </div>

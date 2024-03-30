@@ -68,7 +68,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 w-full z-50  ${isScrolled ? 'bg-[#060417]' : ' bg-transparent'}`}
+      className={`fixed top-0 left-0 w-full  ${Dark === "light" ? "" : "bg-gray-900"} z-50  ${isScrolled ? 'bg-[#060417]' : ' bg-transparent'}`}
       animate={controls}
       initial={{ opacity: 1, y: 0 }}
     >
@@ -84,7 +84,10 @@ const Navbar = () => {
           </Link>
 
           <div className="block ml-20 md:hidden">
-            <MdOutlineLightMode onClick={handleChange} className={`text-2xl ${Dark === "light" ? "" : "text-white"} cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
+            {
+              Dark === "light" ? <MdOutlineLightMode onClick={handleChange} className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} /> :
+                <MdOutlineDarkMode onClick={handleChange} className={`text-2xl ${Dark === "light" ? "" : "text-white"} cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
+            }
           </div>
           <div className="md:hidden ml-2">
             <motion.div

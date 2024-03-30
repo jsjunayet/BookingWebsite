@@ -97,7 +97,7 @@ const Hotel = () => {
 
   return (
     <div
-      className={`relative  pt-10 ${Dark === "light" ? "" : "bg-[#060417] text-white"
+      className={`relative  pt-16 ${Dark === "light" ? "" : "bg-[#060417] text-white"
         }`}
     >
       <Navbar />
@@ -136,24 +136,29 @@ const Hotel = () => {
               <Reserve isopen={setOpenModel} hoteId={id}></Reserve>
             </div>
           )}
-          <div className="max-w-5xl mx-auto">
-            <button
-              onClick={handleClick}
-              className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-full mb-4"
-            >
-              Reserve or Book Now!
-            </button>
-            <h1 className="text-3xl font-semibold">{data?.city}</h1>
-            <div className="flex items-center gap-2 mb-4">
-              <FontAwesomeIcon icon={faLocationDot} />
-              <span>Elton St 125 New york</span>
+          <div className="max-w-5xl  mx-auto">
+
+            <div className=" md:flex mx-3 lg:mx-0 justify-between items-center">
+              <div>
+                <h1 className="text-3xl font-semibold">{data?.city}</h1>
+                <div className="flex items-center gap-2 mb-4">
+                  <FontAwesomeIcon icon={faLocationDot} />
+                  <span>{data.address}</span>
+                </div>
+                <span className="text-blue-600 font-semibold">{data?.desc}</span>
+                <span className="text-green-600 font-semibold block mb-4">
+                  Book a stay over ${data?.price} at this property and get a free
+                  airport taxi
+                </span>
+              </div>
+              <button
+                onClick={handleClick}
+                className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg mb-4"
+              >
+                Reserve or Book Now!
+              </button>
             </div>
-            <span className="text-blue-600 font-semibold">{data?.desc}</span>
-            <span className="text-green-600 font-semibold block mb-4">
-              Book a stay over ${data?.price} at this property and get a free
-              airport taxi
-            </span>
-            <div className=" grid md:grid-cols-3 grid-cols-2 gap-x-2">
+            <div className="mx-3 lg:mx-0 grid md:grid-cols-3 grid-cols-2 gap-x-2">
               {photos.map((photo, i) => (
                 <div
                   key={i}
@@ -168,12 +173,12 @@ const Hotel = () => {
                 </div>
               ))}
             </div>
-            <div className="flex justify-between mb-8">
-              <div className="w-full sm:w-3/4">
+            <div className="md:flex mx-3 lg:mx-0 justify-between mb-8">
+              <div className="w-full mb-8 sm:w-3/4">
                 <h1 className="text-2xl font-semibold mb-4">
                   Stay in the heart of City
                 </h1>
-                <p className="text-lg">
+                <p className={`md:text-lg text-sm ${Dark === "light" ? "text-gray-500" : "text-gray-300"}`}>
                   Located a 5-minute walk from St. Florian's Gate in Krakow,
                   Tower Street Apartments has accommodations with air
                   conditioning and free WiFi. The units come with hardwood
@@ -188,8 +193,8 @@ const Hotel = () => {
                   service.
                 </p>
               </div>
-              <div className="w-full sm:w-1/4 bg-blue-100 p-4 rounded-lg">
-                <h1 className="text-lg font-semibold mb-2">
+              <div className="w-full sm:w-1/4 bg-[#febb02] p-4 rounded-lg">
+                <h1 className="text-lg font-semibold my-3">
                   Perfect for a {differenceInDays}-night stay!
                 </h1>
                 <p className="text-sm mb-2">
@@ -202,7 +207,7 @@ const Hotel = () => {
                 </h2>
                 <button
                   onClick={handleClick}
-                  className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-full"
+                  className="bg-blue-500 text-white font-semibold py-2 mt-2 px-6 rounded-lg"
                 >
                   Reserve or Book Now!
                 </button>

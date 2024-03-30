@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import useFetch from "../../Hook/useFetch";
 import Loading from "../Loading/Loading";
 import "./propertyList.css";
 import Marquee from "react-fast-marquee";
+import { ThemContext } from "../../Context/ThemContext";
 
 const PropertyList = () => {
+  const { Dark } = useContext(ThemContext)
   const { data, loading, error, refetch } = useFetch('http://localhost:5000/api/hotel/countBytype')
   const images = [
     "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
@@ -13,32 +16,36 @@ const PropertyList = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg"
   ]
   return (
-    <div className=" max-w-5xl mx-auto">
-      <div className="grid md:grid-cols-5 grid-cols-2 gap-2">
-        {
-          loading ? <Loading></Loading> : (
+    <div className=" max-w-5xl mx-auto ">
+      <div className=" md:mx-0 mx-2">
+        <h1 className={`my-6 text-xl font-semibold ${Dark === "light" ? "text-gray-700" : "text-gray-200"}`}>"Kindly peruse by property type."</h1>
 
-            <>
-              {
-                images.map((img, i) => (
+        <div className="grid md:grid-cols-5 grid-cols-2 gap-2">
+          {
+            loading ? <Loading></Loading> : (
 
-                  <div key={i} className="pListItem">
-                    <img
-                      src={img}
-                      alt=""
-                      className="pListImg"
-                    />
-                    <div className="pListTitles mt-2">
-                      <h1>{data[i]?.type}</h1>
-                      <h2>{data[i]?.count} {data[i]?.type} </h2>
+              <>
+                {
+                  images.map((img, i) => (
+
+                    <div key={i} className="pListItem">
+                      <img
+                        src={img}
+                        alt=""
+                        className="pListImg"
+                      />
+                      <div className="pListTitles mt-2">
+                        <h1>{data[i]?.type}</h1>
+                        <h2>{data[i]?.count} {data[i]?.type} </h2>
+                      </div>
                     </div>
-                  </div>
 
 
-                ))
-              }
-            </>
-          )}
+                  ))
+                }
+              </>
+            )}
+        </div>
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ const Header = ({ type }) => {
   };
 
   return (
-    <div className=" max-w-5xl mx-auto pb-24">
+    <div className={`max-w-5xl  mx-auto md:pb-24 pb-10`}>
       <div className="md:flex hidden md:block gap-[100px]">
         <div className="  pt-24 w-[45%] ">
           <h1 class={`text-6xl font-bold  leading-tight tracking-tight ${Dark === "light" ? "text-gray-900" : " text-gray-200"}`}>Welcome to Online Booking</h1>
@@ -71,7 +71,7 @@ const Header = ({ type }) => {
           </div>
         </div>
       </div>
-      <div className="w-full md:absolute  mt-20 gap-2  md:mt-0 md:h-[30px] space-y-8 md:space-y-0 bg-white border-[3px] border-[#febb02] md:flex flex flex-col md:flex-row  justify-center md:justify-around items-center py-6 px-0 max-w-5xl ">
+      <div className="w-full md:absolute   mt-20 gap-2  md:mt-0 md:h-[30px] space-y-8 md:space-y-0 bg-white border-[3px] border-[#febb02] md:flex flex flex-col md:flex-row  justify-center md:justify-around items-center py-6 px-0 max-w-5xl ">
         <div className="md:w-[28%] md:border-none border-b-2 gap-2 border-gray-200 w-full text-center flex items-center  justify-center pb-4 md:pb-0">
           <FontAwesomeIcon icon={faBed} className="headerIcon" />
           <input

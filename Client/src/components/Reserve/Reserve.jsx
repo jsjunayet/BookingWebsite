@@ -7,12 +7,14 @@ import Loading from "../Loading/Loading";
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { ThemContext } from "../../Context/ThemContext";
 import { MdMeetingRoom } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ isopen, hoteId }) => {
     const { Dark } = useContext(ThemContext)
     const [selected, setSelected] = useState([]);
     const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel/room/${hoteId}`);
     const { dates } = useContext(SearchContext);
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const checked = e.target.checked;
@@ -26,35 +28,33 @@ const Reserve = ({ isopen, hoteId }) => {
         const dates = [];
         const date = new Date(start);
         while (date <= end) {
-            dates.push(new Date(date));
+            dates.push(new Date(date).getTime());
             date.setDate(date.getDate() + 1);
         }
         return dates;
     };
-
+    const allDates = getDateInRange(dates[0]?.startDate, dates[0]?.endDate);
     const isAvailable = (roomNumber) => {
-        const allDates = getDateInRange(dates[0]?.startDate, dates[0]?.endDate);
-        const unavailableDates = roomNumber?.unavailableDates || []; // Ensure it's an array or default to an empty array
-        const isFound = Array.isArray(unavailableDates) && unavailableDates.some(date =>
-            allDates.some(dateInRange => dateInRange.getTime() === new Date(date).getTime())
+        const isFound = roomNumber?.unavailableDates.some((date) =>
+            allDates.includes(new Date(date).getTime())
         );
+        console.log(isFound)
         return !isFound;
     };
 
-
     const handleClick = async () => {
         try {
-            const allDates = getDateInRange(dates[0]?.startDate, dates[0]?.endDate);
-            console.log(allDates)
-            await Promise.all(selected.map((roomId) => {
-                const res = axios.put(`http://localhost:5000/api/room/avaiable/${roomId}`, { dates: allDates })
-                return res.data
-            }))
-
-        } catch (err) {
-            console.error(err);
-            // Optionally, you can handle errors here
-        }
+            await Promise.all(
+                selected.map((roomId) => {
+                    const res = axios.put(`http://localhost:5000/api/room//avaiable/${roomId}`, {
+                        dates: allDates,
+                    });
+                    return res.data;
+                })
+            );
+            isopen(false);
+            navigate("/");
+        } catch (err) { console.log(err) }
     };
 
     return (
@@ -70,7 +70,7 @@ const Reserve = ({ isopen, hoteId }) => {
                         data.length == "0" ? <div className=" min-h-[100vh-200px] flex flex-col justify-center items-center">
                             <MdMeetingRoom className={` text-8xl ${Dark === "light" ? "text-[#060417]" : " text-white"}`} />
                             <p className={`text-xl font-semibold ${Dark === "light" ? "text-[#060417]" : " text-white"}`}>"Please check another Room, as there are no rooms available here."</p>
-                        </div> : <div className="space-y-4 gap-4 grid md:grid-cols-2 grid-cols-2">
+                        </div> : <div className="gap-4 grid md:grid-cols-2 grid-cols-1">
                             {data.map((room) => (
                                 <div key={room._id} className="border-b pb-4">
                                     <h2 className="text-xl font-semibold">{room?.title}</h2>

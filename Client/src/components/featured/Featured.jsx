@@ -8,7 +8,7 @@ const Featured = () => {
     <div className=" max-w-5xl mx-auto">
       {
         loading ? <Loading></Loading> : <>
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:mx-0 mx-2">
             <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
               <img
                 src="https://i.ibb.co/4dCxkd0/dhaka.jpg"

@@ -46,7 +46,7 @@ const Hotel = () => {
     if (user) {
       setOpenModel(true);
     } else {
-      navigate("/login");
+      navigate("/login", { state: id });
     }
   };
   const { Dark } = useContext(ThemContext);

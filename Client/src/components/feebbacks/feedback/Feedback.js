@@ -1,34 +1,36 @@
-"use client"
-import React, { useEffect, useRef, useState } from 'react';
-import './Feedback.css';
+
+import React, { useContext, useRef } from 'react';
+import "./Feedback.css"
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import axios from 'axios';
+
 import Slider from 'react-slick';
-import FeedbackCard from '../FeedbackCard/FeedbackCard';
+import FeedbackCard from "../FeedbackCard/FeedbackCard"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { ThemContext } from '../../../Context/ThemContext';
 
 const Feedback = () => {
-    const [feedbackdata, setFeedbackData] = useState([]);
     const feedbackData = [
         {
-            email: 'jihad@example.com',
-            img: 'path_to_image1',
+           email: 'Mim@example.com',
+            img: 'https://i.ibb.co/gryYWPC/Porile2.jpg',
             rating: 4,
-            name: 'Jihad Sorif',
-            message: 'Great service!'
+            name: 'Mim Akter',
+            message: '"Jane Smith praises her 5-star stay, highlighting the impeccable service and luxurious amenities, making her hotel experience truly exceptional."'
         },
         {
             email: 'Junayet@example.com',
-            img: 'path_to_image2',
+            img: 'https://i.ibb.co/TPg8qyp/profile1.jpg',
             rating: 5,
             name: 'Jubayet Mia',
-            message: 'Excellent experience!'
+            message: '"Jane Smith praises her 3-star stay, highlighting the impeccable service and luxurious amenities, making her hotel experience truly exceptional."'
         },
         {
             email: 'Junayet@example.com',
-            img: 'path_to_image2',
+            img: 'https://i.ibb.co/b5v5pQQ/profile3.jpg',
             rating: 5,
             name: 'Junayet Shiblu',
-            message: 'Excellent experience!'
+            message: '"Samantha Brown commends her 5-star experience, noting the impeccable cleanliness and convenient location."'
         }
     ];
     const slideRef = useRef();
@@ -65,10 +67,12 @@ const Feedback = () => {
     const sliderRight = () => {
         slideRef.current.slickPrev();
     };
+    const{Dark}=useContext(ThemContext)
 
     return (
-        <div className='project-container max-w-7xl mx-auto'>
-            <h5 className='text-center'>Our Website Feedback</h5>
+        <div className='project-container max-w-5xl mx-auto'>
+        <h1 className={`my-6 text-xl text-center font-semibold ${Dark === "light" ? "text-gray-700" : "text-gray-200"}`}>Our Website Feedback</h1>
+
             <div className='arrow-right' onClick={sliderRight}>
                 <span className='icons-1'><IoIosArrowBack /> </span>
             </div>
@@ -77,7 +81,7 @@ const Feedback = () => {
             </div>
             <div className='project-content'>
                 <Slider ref={slideRef} {...settings}>
-                    {feedbackdata.map((item, index) => (
+                    {feedbackData.map((item, index) => (
                         <FeedbackCard key={index} details={item}></FeedbackCard>
                     ))}
                 </Slider>

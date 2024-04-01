@@ -33,11 +33,11 @@ const List = () => {
       <Navbar />
       <div className=" max-w-5xl mx-auto px-4 pt-20">
         <div className="md:flex gap-8 ">
-          <div className="bg-[#005C99] mb-5 md:mb-0 sticky h-[520px]  md:w-[35%] w-full p-4 rounded">
+          <div className="bg-[#005C99]   mb-5 md:mb-0  h-[520px]  md:w-[35%] w-full p-4 rounded">
             <h1 className="text-lg text-gray-200 pt-3">Search</h1>
             <div className="flex flex-col gap-2">
               <label className="text-gray-200">Destination</label>
-              <input onChange={(e) => setDestination(e.target.value)} placeholder={destination} type="text" className="border border-gray-300 p-2 rounded" />
+              <input onChange={(e) => setDestination(e.target.value.toLowerCase())} placeholder={destination} type="text" className="border border-gray-300 text-gray-400 p-2 rounded" />
             </div>
             <div className="flex flex-col gap-2 pt-3">
               <label className="text-gray-200">Check-in Date</label>
@@ -100,7 +100,7 @@ const List = () => {
             <button onClick={handleClick} className="bg-[#febb02] text-white py-2 rounded mt-4 w-full">Search</button>
           </div>
           {data.length == "0" ? (
-            <div className="flex flex-col md:w-[60%] w-full justify-center items-center min-h-[calc(100vh-200px)]">
+            <div className="flex   flex-col md:w-[60%] w-full justify-center items-center min-h-[calc(100vh-200px)]">
               <FaFilterCircleXmark className={`text-8xl ${Dark === "light" ? "text-[#060417]" : "text-white"}`} />
               <p className={`text-xl font-semibold ${Dark === "light" ? "text-[#060417]" : "text-white"}`}>Please filter again, as there is no room in your filter.</p>
             </div>

@@ -8,6 +8,8 @@ import Navbar from "../../components/navbar/Navbar";
 import PropertyList from "../../components/propertyList/PropertyList";
 import { ThemContext } from "../../Context/ThemContext";
 import Location from "../../components/Location/Location";
+import Feedback from "../../components/feebbacks/feedback/Feedback";
+import Contact from "../../components/Contact/Contact";
 
 const Home = () => {
   const { Dark } = useContext(ThemContext)
@@ -19,6 +21,9 @@ const Home = () => {
       <PropertyList />
       <FeaturedProperties />
       <Location></Location>
+      <Feedback></Feedback>
+      <Contact></Contact>
+      <Footer></Footer>
 
 
     </div >

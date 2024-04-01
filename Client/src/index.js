@@ -6,9 +6,11 @@ import { SearchControlProvider } from './Context/SearchContext';
 import { AuthControlProvider } from './Context/AuthContext';
 import ThemProvider from './Context/ThemContext';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+   
    <ThemProvider>
    <AuthControlProvider>
     <SearchControlProvider>

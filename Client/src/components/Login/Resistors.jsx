@@ -43,19 +43,19 @@ const Registers = () => {
     }
     return (
         <div className={`flex items-center px-3 justify-center min-h-screen text-gray-800 ${Dark === "light" ? "" : " bg-gray-900"}`}>
-            <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
+            <div className="w-full lg:max-w-[520px] mx-auto p-2 lg:p-6">
                 <div className="flex dark:text-white flex-col justify-center items-center">
                     <div className=" mt-2 mb-7 text-center">
-                        <h1 className={`mb-2  text-3xl font-bold ${Dark === "light" ? "bg-[#060417]" : " text-gray-100"}`}>
+                        <h1 className={`mb-2  text-3xl font-bold ${Dark === "light" ? "text-[#060417]" : " text-gray-100"}`}>
                             Create a free account
                         </h1>
                         <h4 className="text-base">
                             <span className="">Or</span>{" "}
-                            <Link to="/login"> <span className="text-blue-500">Already Account</span></Link>
+                            <Link to="/login"> <span className="text-blue-500">Already Account?</span></Link>
                         </h4>
                     </div>
                 </div>
-                <div className="lg:p-8 lg:pb-10 border- border-t-4 rounded-xl shadow-md bg-gray-800 border-blue-700">
+                <div className="lg:p-8 lg:pb-10 border- border-t-4 rounded-xl p-5 shadow-md bg-gray-800 border-blue-700">
                     <form onSubmit={handleSingup} className="space-y-3">
                         <div className="relative">
                             <RiUserLine className="absolute top-2 left-3 text-gray-400" />
@@ -105,7 +105,7 @@ const Registers = () => {
                         error && <p className=" text-red-600 mt-2">{error}</p>
                     }
                     <div className="flex justify-between mt-2 text-white">
-                        <p>Already Account</p>
+                        <p>Already Account?</p>
                         <Link to="/login">Login</Link>
                     </div>
                 </div>

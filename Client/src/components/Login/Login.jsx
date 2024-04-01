@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import { Link } from "react-router-dom";
@@ -9,16 +9,11 @@ import { ThemContext } from "../../Context/ThemContext";
 
 
 const Login = () => {
-    // const [Credentails, setCredentails] = useState({
-    //     userEmail: undefined,
-    //     password: undefined
-    // })
     const { user, dispatch, error, loading } = useContext(AuthContext)
+    const loaction = useLocation()
     const navigate = useNavigate()
+    console.log(loaction.state)
     const [showPass, setShowPass] = useState(false);
-    // const handlechange = (e) => {
-    //     setCredentails((prev) => ({ ...prev, [e.target.id]: e.target.value }))
-    // }
     const handleLogin = async (e) => {
         e.preventDefault()
         const email = e.target.email.value
@@ -30,7 +25,7 @@ const Login = () => {
             const user = res?.data
             console.log(user)
             dispatch({ type: "AUTH_SUCCESS", payload: user })
-            navigate("/")
+            navigate(`/hotels/${loaction.state}`)
         } catch (err) {
             dispatch({ type: "AUTH_Fail", payload: err.message })
 
@@ -39,7 +34,7 @@ const Login = () => {
     const { Dark } = useContext(ThemContext)
     return (
         <div className={`flex items-center px-3 justify-center min-h-screen text-gray-800 ${Dark === "light" ? "" : "bg-[#060417] text-white"}`}>
-            <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
+            <div className="w-full lg:max-w-[520px] mx-auto p-2 lg:p-6">
                 <div className="flex dark:text-white flex-col justify-center items-center">
                     <div className=" mt-2 mb-7 text-center">
                         <h1 className={`mb-2 text-3xl font-bold ${Dark === "light" ? "text-gray-900" : " text-gray-100"}`}>
@@ -51,7 +46,7 @@ const Login = () => {
                         </h4>
                     </div>
                 </div>
-                <div className="lg:p-8 lg:pb-10 border- border-t-4 rounded-xl shadow-md bg-gray-800 border-blue-700">
+                <div className="lg:p-8 lg:pb-10 border- border-t-4 rounded-xl shadow-md p-5 bg-gray-800 border-blue-700">
                     <form onSubmit={handleLogin} className="space-y-3">
                         <div className="relative">
                             <RiUserLine className="absolute top-2 left-3 text-gray-400" />
@@ -91,7 +86,7 @@ const Login = () => {
                         error && <p className=" text-red-600 mt-2">{error}</p>
                     }
                     <div className="flex justify-between mt-2 text-white">
-                        <p>Please Create account</p>
+                        <p>Please Create account?</p>
                         <Link to="/resistor">SignUp</Link>
                     </div>
                 </div>

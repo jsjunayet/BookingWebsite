@@ -1,12 +1,11 @@
 .project-container{
     position: relative;
     color: white;
-    margin-bottom: 40px;
 }
 .project-container h5{
     font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 3rem;
+
 }
 .arrow-left,
 .arrow-right{
@@ -15,10 +14,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #E8E8EA;
+    color: #0071c2;
     border-radius: 0.65rem;
     border: 1.5px solid #E8E8EA;
-    background: #130f2a;
+    background: #febb02;
     position: absolute;
     top: 55%;
     left: -1%;

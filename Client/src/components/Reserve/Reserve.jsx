@@ -8,6 +8,7 @@ import { FaFilterCircleXmark } from "react-icons/fa6";
 import { ThemContext } from "../../Context/ThemContext";
 import { MdMeetingRoom } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const Reserve = ({ isopen, hoteId }) => {
     const { Dark } = useContext(ThemContext)
@@ -53,6 +54,12 @@ const Reserve = ({ isopen, hoteId }) => {
                 })
             );
             isopen(false);
+            Swal.fire({
+                title: 'Succefull Booking',
+                text: 'Do you want to continue',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
             navigate("/");
         } catch (err) { console.log(err) }
     };
@@ -72,18 +79,18 @@ const Reserve = ({ isopen, hoteId }) => {
                             <p className={`text-xl font-semibold ${Dark === "light" ? "text-[#060417]" : " text-white"}`}>"Please check another Room, as there are no rooms available here."</p>
                         </div> : <div className="gap-4 grid md:grid-cols-2 grid-cols-1">
                             {data.map((room) => (
-                                <div key={room._id} className="border-b pb-4">
+                                <div key={room?._id} className="border-b pb-4">
                                     <h2 className="text-xl font-semibold">{room?.title}</h2>
                                     <p className="text-gray-600">{room?.desc}</p>
                                     <p className="text-gray-600">Max People: {room?.maxPeople}</p>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                         {room?.roomNumbers.map((roomNumber) => (
-                                            <div key={roomNumber._id} className="flex items-center">
+                                            <div key={roomNumber?._id} className="flex items-center">
                                                 <label className="mr-2">{roomNumber?.number}</label>
                                                 <input
                                                     type="checkbox"
                                                     disabled={!isAvailable(roomNumber)}
-                                                    value={roomNumber._id}
+                                                    value={roomNumber?._id}
                                                     onChange={handleChange}
                                                 />
                                             </div>

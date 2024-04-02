@@ -9,26 +9,17 @@ const Profile = () => {
     return (
         <div className="">
             <div className="min-h-screen">
-                <div className=" w-full h-full ">
-                    <div className="flex justify-end text-4xl">
-                        <FaEdit
-                            onClick={() => document.getElementById("my_modal_3").showModal()}
-                        />
-                    </div>
+                <div className=" w-full h-full">
                     <h1 className="text-center font-bold text-xl text-black pt-8">
                         Welcome to the {user?.isAdmin} Profile
                     </h1>
-
                     <div className="flex gap-5 items-center card-body ">
-
-
 
                         {user && (
                             <h1 className="text-5xl text-white font-semibold">
                                 {user?.userName}
                             </h1>
                         )}
-
                         <hr />
                         <div className="">
                             <div className="grid lg:grid-cols-2 gap-10">

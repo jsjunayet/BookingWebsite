@@ -83,7 +83,7 @@
 
 .date {
   position: absolute;
-  top: 50px;
+  bottom: 50px;
   z-index: 2;
 }
 
@@ -125,4 +125,6 @@
 .optionCounterButton:disabled {
   cursor: not-allowed;
 }
+
+
 

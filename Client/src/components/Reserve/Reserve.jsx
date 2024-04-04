@@ -55,7 +55,7 @@ const Reserve = ({ isopen, hoteId, time, price, img, City, RoomName, title }) =>
             const selectedRoomNumber = room.roomNumbers.find(roomNumber => roomNumber._id === roomId);
             return selectedRoomNumber.number;
         });
-        const BookingData = { Duration: time, selectedRoomNumbers: selectedRoomNumbers, Price: price, img: img, City: City, email: user?.userEmail, RoomName: RoomName, Roomtitle: title, endDate: new Date(dates[0]?.endDate), startDate: new Date(dates[0]?.startDate) }
+        const BookingData = { Duration: time, selectedRoomNumbers: selectedRoomNumbers, price: price, img: img, City: City, email: user?.userEmail, RoomName: RoomName, Roomtitle: title, endDate: new Date(dates[0]?.endDate), startDate: new Date(dates[0]?.startDate) }
         console.log(BookingData)
 
         try {

@@ -6,7 +6,7 @@ const BookingSchema = new Schema({
         type: String
     },
     price: {
-        type: Number
+        type: String
     },
     email: {
         type: String

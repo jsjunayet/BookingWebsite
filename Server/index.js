@@ -7,7 +7,8 @@ import authrouter from "./Routes/Auth.js";
 import hotelsrouter from "./Routes/Hotels.js";
 import UserRouter from "./Routes/User.js";
 import Roomsrouter from "./Routes/Room.js";
-import User from "./modules/User.js";
+import BookingRoute from "./Routes/Booking.js";
+
 
 const app = express();
 dotenv.config();
@@ -30,22 +31,13 @@ app.get("/",(req,res)=>{
   res.send("Booking webiste")
 })
 
-app.get("/home",async(req,res,next)=>{
-  try{
-      const allUser = await User.find()
-        res.status(200).json(allUser)
-    }catch (err){
-      next(err)
-  }
-
-}
-)
 
 // Routes
 app.use("/api/auth", authrouter);
 app.use("/api/hotel", hotelsrouter);
 app.use("/api/user", UserRouter);
 app.use("/api/room", Roomsrouter);
+app.use("/api/Booking", BookingRoute);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

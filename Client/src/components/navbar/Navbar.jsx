@@ -142,7 +142,7 @@ const Navbar = () => {
               )}
             </div>
           </Link>} */}
-          {/* {user && <Link to='/profile'>
+          {user && <Link to='/profile'>
             <div className={`flex items-center ${Dark == "light" ? "text-black" : "text-white"} hover:text-gray-300 transition duration-300 ${isScrolled ? "text-white" : "text-black"} relative relative-group`}>
               <span className="mr-1"><ImProfile /></span>
               Profile
@@ -157,7 +157,7 @@ const Navbar = () => {
                 </>
               )}
             </div>
-          </Link>} */}
+          </Link>}
           <div className=" md:block hidden">
             {
               Dark === "light" ? <MdOutlineLightMode onClick={handleChange} className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} /> :

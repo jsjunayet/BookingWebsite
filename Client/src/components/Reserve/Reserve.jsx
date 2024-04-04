@@ -9,13 +9,18 @@ import { ThemContext } from "../../Context/ThemContext";
 import { MdMeetingRoom } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { AuthContext } from "../../Context/AuthContext";
 
-const Reserve = ({ isopen, hoteId }) => {
+const Reserve = ({ isopen, hoteId, time, price, img, City, RoomName, title }) => {
     const { Dark } = useContext(ThemContext)
     const [selected, setSelected] = useState([]);
     const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel/room/${hoteId}`);
     const { dates } = useContext(SearchContext);
     const navigate = useNavigate()
+    const { user } = useContext(AuthContext)
+
+
+
 
     const handleChange = (e) => {
         const checked = e.target.checked;
@@ -42,12 +47,21 @@ const Reserve = ({ isopen, hoteId }) => {
         console.log(isFound)
         return !isFound;
     };
+    console.log(selected)
 
     const handleClick = async () => {
+        const selectedRoomNumbers = selected.map(roomId => {
+            const room = data.find(room => room.roomNumbers.some(roomNumber => roomNumber._id === roomId));
+            const selectedRoomNumber = room.roomNumbers.find(roomNumber => roomNumber._id === roomId);
+            return selectedRoomNumber.number;
+        });
+        const BookingData = { Duration: time, selectedRoomNumbers: selectedRoomNumbers, Price: price, img: img, City: City, email: user?.userEmail, RoomName: RoomName, Roomtitle: title, endDate: new Date(dates[0]?.endDate), startDate: new Date(dates[0]?.startDate) }
+        console.log(BookingData)
+
         try {
             await Promise.all(
                 selected.map((roomId) => {
-                    const res = axios.put(`http://localhost:5000/api/room//avaiable/${roomId}`, {
+                    const res = axios.put(`http://localhost:5000/api/room/avaiable/${roomId}`, {
                         dates: allDates,
                     });
                     return res.data;
@@ -60,7 +74,9 @@ const Reserve = ({ isopen, hoteId }) => {
                 icon: 'success',
                 confirmButtonText: 'OK'
             })
-            navigate("/");
+            const res = await axios.post("http://localhost:5000/api/Booking", BookingData)
+            navigate("/profile")
+
         } catch (err) { console.log(err) }
     };
 

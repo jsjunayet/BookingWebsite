@@ -9,7 +9,7 @@ const Featured = () => {
       {
         loading ? <Loading></Loading> : <>
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:mx-0 mx-2">
-            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+            <div data-aos="zoom-in-right" data-aos-duration="1000" className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
               <img
                 src="https://i.ibb.co/4dCxkd0/dhaka.jpg"
                 alt=""
@@ -21,7 +21,7 @@ const Featured = () => {
               </div>
 
             </div>
-            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+            <div data-aos="zoom-in-right" data-aos-duration="1000" className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
               <img
                 src="https://i.ibb.co/gZwGRLv/Rajshahi.jpg"
                 alt=""
@@ -32,7 +32,7 @@ const Featured = () => {
                 <h2 className="text-white font-bold">{data[1]} properties</h2>
               </div>
             </div>
-            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+            <div data-aos="zoom-in-left" data-aos-duration="1000" className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
               <img
                 src="https://i.ibb.co/5BzTj9R/Cumilla.jpg"
                 alt=""
@@ -44,7 +44,7 @@ const Featured = () => {
               </div>
             </div>
 
-            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+            <div data-aos="zoom-in-left" data-aos-duration="1000" className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
               <img
                 src="https://i.ibb.co/BrM8jnD/Coxs-Bazar.jpg"
                 alt=""

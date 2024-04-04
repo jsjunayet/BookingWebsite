@@ -133,7 +133,7 @@ const Hotel = () => {
           )}
           {openModel && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-              <Reserve isopen={setOpenModel} hoteId={id}></Reserve>
+              <Reserve RoomName={data?.name} title={data.title} time={differenceInDays} price={data?.price * options.room * differenceInDays} img={data?.photos[0]} City={data?.city} isopen={setOpenModel} hoteId={id}></Reserve>
             </div>
           )}
           <div className="max-w-5xl  mx-auto">

@@ -94,11 +94,11 @@ const Header = ({ type }) => {
         <div className="w-[45%] text-black">
           <div className="flex gap-2 pt-24">
             <div className="w-[50%] space-y-2">
-              <img src={img1} className=" h-44 rounded" alt="" />
-              <img src={img2} className=" h-44 rounded" alt="" />
+              <img data-aos="fade-left" data-aos-duration="1000" src={img1} className=" h-44 rounded" alt="" />
+              <img data-aos="fade-right" data-aos-duration="1000" src={img2} className=" h-44 rounded" alt="" />
             </div>
             <div className="w-[50%]">
-              <img src={img3} className="h-[360px] rounded" alt="" />
+              <img data-aos="fade-down" data-aos-duration="1000" src={img3} className="h-[360px] rounded" alt="" />
             </div>
           </div>
         </div>

@@ -28,7 +28,7 @@ const PropertyList = () => {
                 {
                   images.map((img, i) => (
 
-                    <div key={i} className="pListItem">
+                    <div data-aos="fade-down" key={i} className="pListItem">
                       <img
                         src={img}
                         alt=""

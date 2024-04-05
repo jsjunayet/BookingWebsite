@@ -7,10 +7,17 @@ import img from "../assest/images.jpeg"
 import img1 from "../assest/images.png"
 import Swal from 'sweetalert2';
 import { ThemContext } from '../Context/ThemContext';
+import { MdAddHomeWork } from "react-icons/md";
+import { Link } from 'react-router-dom';
+import { MdEditSquare } from "react-icons/md";
+import { imgbbupload } from '../components/Imagbb/ImageUpload';
+
 const Profile = () => {
+    const { Dark } = useContext(ThemContext)
     const { user } = useContext(AuthContext)
     const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/Booking/${user.userEmail}`)
     console.log(data)
+
 
     const HandleDelted = (id, before) => {
         const dateStr1 = new Date().toLocaleDateString()
@@ -44,28 +51,46 @@ const Profile = () => {
                 }
             });
         }
-
     }
-    const { Dark } = useContext(ThemContext)
+    const handleUpdate = async (e) => {
+        e.preventDefault()
+        const userName = e.target.name.value
+        const cover = e.target.img1.files[0]
+        const profile = e.target.img2.files[0]
+        const Cover = await imgbbupload(cover)
+        console.log(cover, profile)
+        const Profile = await imgbbupload(profile)
+        const usersInformation = { userName: userName, CoverPik: Cover.data?.url_viewer, ProfilePik: Profile.data?.url_viewer }
+        const res = axios.put(`http://localhost:5000//api/user/${user?.userEmail}`, usersInformation)
+        console.log(res)
+    }
 
     return (
-        <div>
+        <div className={`${Dark == "light" ? "" : " bg-[#060417] text-gray-300"} h-screen`}>
             <div className="h-64 relative">
-                <img src={img} alt="Cover Photo" className="w-full h-full object-cover" />
-                <div className="flex items-center justify-center -mt-16">
+                <img src={img} alt="CoverPhoto" className="w-full h-full object-cover" />
+                <div className="flex items-center justify-between -mt-16">
+                    <Link to="/">
+                        <div className='flex text-2xl md:ml-10 ml-1 mt-5 justify-center items-center'>
+                            <MdAddHomeWork className='text-2xl ' /> |  Home
+                        </div>
+                    </Link>
                     <div className="bg-white p-2 rounded-full">
                         <img src={img1} alt="Avatar" className="w-32 h-32 rounded-full object-cover" />
                     </div>
+                    <div className='flex gap-2 md:mr-10 mr-2 mt-5 justify-center items-center text-2xl'>
+                        <strong>Profile Edit</strong> <button className=' bg-green-700 py-1 px-2 rounded text-white'><MdEditSquare onClick={() => document.getElementById("my_modal_3").showModal()} /></button>
+                    </div>
                 </div>
-                <div className="text-center mt-2">
-                    <h1 className="text-2xl font-semibold">{user.userName}</h1>
+                <div className={`text-center mt-2`}>
+                    <h1 className="text-2xl font-semibold mr-16">{user.userName}</h1>
                 </div>
             </div>
 
 
             {
                 loading ? <Loading></Loading> :
-                    <div className=' my-40'>
+                    <div className=' mt-40'>
 
                         {
                             data.length > 0 && <div className="mt-5 mb-4">
@@ -128,6 +153,50 @@ const Profile = () => {
             <div>
 
             </div>
+            <>
+                <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box bg-slate-500 ">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                ✕
+                            </button>
+                        </form>
+                        <h3 className="font-bold text-lg text-center">
+                            Update your profile
+                        </h3>
+                        <form onSubmit={handleUpdate}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className=" dark:text-white">Change Name</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="Change Name"
+                                    className="input input-bordered text-white"
+                                    required
+                                    name="name"
+                                />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className=" dark:text-white">Change Cover photo</span>
+                                </label>
+                                <input type="file" name='img1' className="file-input  file-input-bordered file-input-info w-full " />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className=" dark:text-white">Change Profile photo</span>
+                                </label>
+                                <input type="file" name='img2' className="file-input file-input-bordered file-input-info w-full " />
+                            </div>
+                            <br />
+                            <button className="btn bg-primary-content w-full">Update</button>
+                        </form>
+                    </div>
+                </dialog>
+            </>
         </div>
     );
 };

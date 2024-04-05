@@ -15,7 +15,7 @@ const UserRouter = express.Router()
 //     res.send("Right user ")
 // })
 
-UserRouter.put("/:id",verifyUser, UpdateUser)
+UserRouter.put("/:id", UpdateUser)
 UserRouter.delete("/:id",verifyUser, DeletedUser)
 UserRouter.get("/:id", SingleGetUser)
 UserRouter.get("/",AllGetUser)

@@ -25,7 +25,7 @@ export const SingleGetUser = async(req,res,next)=>{
 // update methods
 export const UpdateUser = async(req,res,next)=>{
     try{
-        const updateUser = await User.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
+        const updateUser = await User.findByIdAndUpdate(req.params.email,{$set:req.body},{new:true})
         res.status(200).json(updateUser)
     }catch (err){
         next(err)

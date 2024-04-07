@@ -44,11 +44,8 @@ const Reserve = ({ isopen, hoteId, time, price, img, City, RoomName, title }) =>
         const isFound = roomNumber?.unavailableDates.some((date) =>
             allDates.includes(new Date(date).getTime())
         );
-        console.log(isFound)
         return !isFound;
     };
-    console.log(selected)
-
     const handleClick = async () => {
         const selectedRoomNumbers = selected.map(roomId => {
             const room = data.find(room => room.roomNumbers.some(roomNumber => roomNumber._id === roomId));

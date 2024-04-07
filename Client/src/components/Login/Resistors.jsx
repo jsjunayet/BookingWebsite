@@ -5,26 +5,13 @@ import { Link, useNavigate } from "react-router-dom"
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import { RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
 import { ThemContext } from "../../Context/ThemContext";
-
-
-
 const Registers = () => {
     const { Dark } = useContext(ThemContext)
-    // const [Credentails, setCredentails] = useState({
-    //     userEmail: undefined,
-    //     password: undefined
-    // })
-    // const {  dispatch, error } = useContext(AuthContext)
-    // const handlechange = (e) => {
-    //     setCredentails((prev) => ({ ...prev, [e.target.id]: e.target.value }))
-    // }
     const { loading, error, dispatch } = useContext(AuthContext)
     const navigate = useNavigate()
     const [showPass, setShowPass] = useState(false);
     const handleSingup = async (e) => {
-
         e.preventDefault()
-
         const Name = e.target.name.value
         const email = e.target.email.value
         const password = e.target.password.value
@@ -32,7 +19,8 @@ const Registers = () => {
         dispatch({ type: "AUTH_STAER" })
         try {
             const res = await axios.post('http://localhost:5000/api/auth/resistor', { userName: Name, userEmail: email, password: password })
-            const user = res?.data
+            const user = res?.data?.user
+            console.log(user)
             navigate("/")
             dispatch({ type: "AUTH_SUCCESS", payload: user })
         } catch (err) {

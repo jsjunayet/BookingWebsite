@@ -13,7 +13,14 @@ export const Resistor = async(req,res,next)=>{
     })
     try{
         await newResistor.save();
-        res.status(200).json({message:"succesfuly Resistor"})
+        const userWithoutPassword = {
+            userName: newResistor.userName,
+            userEmail: newResistor.userEmail,
+            isAdmin: newResistor.isAdmin,
+            createdAt: newResistor.createdAt,
+            updatedAt: newResistor.updatedAt
+        };
+        res.status(200).json({ user: userWithoutPassword, message: "Successfully registered" });
     }catch (err){
         next(err)
     }

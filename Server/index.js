@@ -8,6 +8,7 @@ import hotelsrouter from "./Routes/Hotels.js";
 import UserRouter from "./Routes/User.js";
 import Roomsrouter from "./Routes/Room.js";
 import BookingRoute from "./Routes/Booking.js";
+const PORT = process.env.PORT || 5000;
 
 
 const app = express();
@@ -55,8 +56,6 @@ app.use((err, req, res, next) => {
 // mongoose.connection.on('disconnected', () => {
 //   console.log("Disconnected from MongoDB");
 // });
-
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   connect();
   console.log(`Server is running on port ${PORT}`);

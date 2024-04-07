@@ -4,16 +4,6 @@ import { verifyUser } from "../Verify/VerifyUser.js"
 
 const UserRouter = express.Router()
 
-// UserRouter.get("/right",verifyToken,async(req,res,next)=>{
-//     res.send("Right user token")
-// })
-// UserRouter.get("/right/:id",verifyAdmin,async(req,res,next)=>{
-//     res.send("Right admin")
-// })
-
-// UserRouter.get("/rights/:id",verifyUser,async(req,res,next)=>{
-//     res.send("Right user ")
-// })
 
 UserRouter.put("/:id", UpdateUser)
 UserRouter.delete("/:id",verifyUser, DeletedUser)

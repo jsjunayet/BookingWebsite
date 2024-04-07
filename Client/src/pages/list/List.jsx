@@ -12,7 +12,6 @@ import { FaFilterCircleXmark } from "react-icons/fa6";
 
 const List = () => {
   const location = useLocation();
-  console.log(location)
   const [min, setMin] = useState(undefined)
   const [max, setMax] = useState(undefined)
   const [destination, setDestination] = useState(location.state.destination);
@@ -20,14 +19,12 @@ const List = () => {
   const [openDate, setOpenDate] = useState(false);
 
   const [options, setOptions] = useState(location.state.options);
-  const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel?city=${destination}&min=${min || 0}&max=${max || 999}`)
+  const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel?city=${destination || null}&min=${min || 0}&max=${max || 999}`)
 
-  console.log(data)
   const handleClick = () => {
     refetch()
   }
   const { Dark } = useContext(ThemContext)
-  console.log(data.length);
   return (
     <div className={` ${Dark === "light" ? "" : "bg-[#060417] text-white"} min-h-screen`}>
       <Navbar />

@@ -18,7 +18,6 @@ const Navbar = () => {
   const handleChange = () => {
     setDark((prev) => prev === "light" ? "dark" : "light")
   }
-  console.log(Dark)
   const location = useLocation()
 
   const handleout = () => {

@@ -4,7 +4,6 @@ const UserSchema = new Schema({
     userName: {
         type: String,
         required:true,
-        unique:true,
     },
     userEmail:{
         type:String,
@@ -13,11 +12,17 @@ const UserSchema = new Schema({
     },
     password:{
         type: String,
-        required:true,
+        required:true
     },
     isAdmin:{
         type:Boolean,
         default:false
     },
+    ProfilePik:{
+        type:String
+    },
+    CoverPik:{
+        type: String
+    }
 }, {timestamps:true})
 export default mongoose.model("User",UserSchema)

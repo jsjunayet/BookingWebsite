@@ -26,7 +26,6 @@ const Hotel = () => {
     `http://localhost:5000/api/hotel/get/${id}`
   );
   const { dates, options } = useContext(SearchContext);
-  console.log(options);
   const dayDifferent = (date1, date2) => {
     const endDate = new Date(date1);
     const startDate = new Date(date2);

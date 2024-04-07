@@ -25,7 +25,6 @@ const SearchReducer = (state, action) => {
 }
 export const SearchControlProvider = ({ children }) => {
     const [state, dispatch] = useReducer(SearchReducer, InitailState)
-    console.log(state)
     useEffect(() => {
         localStorage.setItem("SearchItem", JSON.stringify(state))
     }, [state])

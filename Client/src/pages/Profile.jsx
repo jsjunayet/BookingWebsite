@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import axios from "axios"
 import useFetch from '../Hook/useFetch';
@@ -12,13 +12,14 @@ import { Link } from 'react-router-dom';
 import { MdEditSquare } from "react-icons/md";
 import { imgbbupload } from '../components/Imagbb/ImageUpload';
 
+
 const Profile = () => {
     const { Dark } = useContext(ThemContext)
-    const { user } = useContext(AuthContext)
-    const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/Booking/${user.userEmail}`)
-    console.log(data)
-
-
+    const [Load, setLoad] = useState(false)
+    const { user: users, dispatch } = useContext(AuthContext)
+    const [modal, setmodal] = useState(false)
+    console.log(users)
+    const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/Booking/${users.userEmail}`)
     const HandleDelted = (id, before) => {
         const dateStr1 = new Date().toLocaleDateString()
         const dateStr2 = before
@@ -53,6 +54,7 @@ const Profile = () => {
         }
     }
     const handleUpdate = async (e) => {
+        setLoad(true)
         e.preventDefault()
         const userName = e.target.name.value
         const cover = e.target.img1.files[0]
@@ -61,14 +63,68 @@ const Profile = () => {
         console.log(cover, profile)
         const Profile = await imgbbupload(profile)
         const usersInformation = { userName: userName, CoverPik: Cover.data?.url_viewer, ProfilePik: Profile.data?.url_viewer }
-        const res = axios.put(`http://localhost:5000//api/user/${user?.userEmail}`, usersInformation)
-        console.log(res)
+        const res = await axios.put(`http://localhost:5000/api/user/${users?.userEmail}`, usersInformation)
+        const user = res.data
+        console.log("updateusers", user)
+        if (user) {
+            dispatch({ type: "AUTH_SUCCESS", payload: user })
+            setmodal(false)
+            setLoad(false)
+        }
     }
-
+    const handleChange = () => {
+        setmodal(true)
+    }
+    console.log(data)
     return (
         <div className={`${Dark == "light" ? "" : " bg-[#060417] text-gray-300"} h-screen`}>
             <div className="h-64 relative">
-                <img src={img} alt="CoverPhoto" className="w-full h-full object-cover" />
+                <img src={`${users.CoverPik ? users.CoverPik : img}`} alt="CoverPhoto" className="w-full h-full object-cover" />
+                {
+                    modal &&
+                    <div className="modal-box bg-slate-500 fixed top-0 right-0  w-full h-full flex justify-center items-center">
+                        <div className="absolute top-2 right-2">
+                            <button onClick={() => setmodal(false)} className="btn btn-sm btn-circle btn-ghost">
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="w-96 bg-white p-4 rounded-lg">
+                            <h3 className="font-bold text-lg text-center mb-4">
+                                Update your profile
+                            </h3>
+                            <form onSubmit={handleUpdate}>
+                                <div className="form-control mb-4">
+                                    <label className="label">
+                                        <span className="dark:text-white">Change Name</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Change Name"
+                                        className="input input-bordered text-white"
+                                        required
+                                        name="name"
+                                    />
+                                </div>
+
+                                <div className="form-control mb-4">
+                                    <label className="label">
+                                        <span className="dark:text-white">Change Cover photo</span>
+                                    </label>
+                                    <input type="file" name='img1' className="file-input file-input-bordered file-input-info w-full" />
+                                </div>
+                                <div className="form-control mb-4">
+                                    <label className="label">
+                                        <span className="dark:text-white">Change Profile photo</span>
+                                    </label>
+                                    <input type="file" name='img2' className="file-input file-input-bordered file-input-info w-full" />
+                                </div>
+                                <br />
+                                <button disabled={Load} className="btn bg-primary-content w-full">{Load ? "Update..." : "Update"}</button>
+                            </form>
+                        </div>
+                    </div>
+                }
                 <div className="flex items-center justify-between -mt-16">
                     <Link to="/">
                         <div className='flex text-2xl md:ml-10 ml-1 mt-5 justify-center items-center'>
@@ -76,14 +132,15 @@ const Profile = () => {
                         </div>
                     </Link>
                     <div className="bg-white p-2 rounded-full">
-                        <img src={img1} alt="Avatar" className="w-32 h-32 rounded-full object-cover" />
+                        <img src={`${users.ProfilePik ? users.ProfilePik : img1}`} alt="Avatar" className="w-32 h-32 rounded-full object-cover" />
                     </div>
+
                     <div className='flex gap-2 md:mr-10 mr-2 mt-5 justify-center items-center text-2xl'>
-                        <strong>Profile Edit</strong> <button className=' bg-green-700 py-1 px-2 rounded text-white'><MdEditSquare onClick={() => document.getElementById("my_modal_3").showModal()} /></button>
+                        <strong>Profile Edit</strong> <button className=' bg-green-700 py-1 px-2 rounded text-white'><MdEditSquare onClick={handleChange} /></button>
                     </div>
                 </div>
                 <div className={`text-center mt-2`}>
-                    <h1 className="text-2xl font-semibold mr-16">{user.userName}</h1>
+                    <h1 className="text-2xl font-semibold mr-16">{users?.userName}</h1>
                 </div>
             </div>
 
@@ -153,50 +210,9 @@ const Profile = () => {
             <div>
 
             </div>
-            <>
-                <dialog id="my_modal_3" className="modal">
-                    <div className="modal-box bg-slate-500 ">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                                ✕
-                            </button>
-                        </form>
-                        <h3 className="font-bold text-lg text-center">
-                            Update your profile
-                        </h3>
-                        <form onSubmit={handleUpdate}>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className=" dark:text-white">Change Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Change Name"
-                                    className="input input-bordered text-white"
-                                    required
-                                    name="name"
-                                />
-                            </div>
 
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className=" dark:text-white">Change Cover photo</span>
-                                </label>
-                                <input type="file" name='img1' className="file-input  file-input-bordered file-input-info w-full " />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className=" dark:text-white">Change Profile photo</span>
-                                </label>
-                                <input type="file" name='img2' className="file-input file-input-bordered file-input-info w-full " />
-                            </div>
-                            <br />
-                            <button className="btn bg-primary-content w-full">Update</button>
-                        </form>
-                    </div>
-                </dialog>
-            </>
+
+
         </div>
     );
 };

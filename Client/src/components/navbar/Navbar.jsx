@@ -82,7 +82,7 @@ const Navbar = () => {
             <h1 className={`text-2xl cursor-pointer font-bold ${isScrolled ? 'text-white ' : ' text-[#3182CE]'}`}>ONLINE_<span className="text-[#febb02]">BOOKING</span></h1>
           </Link>
 
-          <div className="block ml-20 md:hidden">
+          <div className="block ml-16 md:hidden">
             {
               Dark === "light" ? <MdOutlineLightMode onClick={handleChange} className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} /> :
                 <MdOutlineDarkMode onClick={handleChange} className={`text-2xl ${Dark === "light" ? "" : "text-white"} cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} />
@@ -125,7 +125,7 @@ const Navbar = () => {
               ))}
             </div> : ""
           }
-          {/* {user?.isAdmin && <Link to='/dashboard'>
+          {user && <Link to='/dashboard'>
             <div className={`flex items-center text-white hover:text-gray-300 transition duration-300 relative relative-group`}>
               <span className="mr-1"><MdDashboard /></span>
               Dashboard
@@ -140,7 +140,7 @@ const Navbar = () => {
                 </>
               )}
             </div>
-          </Link>} */}
+          </Link>}
           {user && <Link to='/profile'>
             <div className={`flex items-center ${Dark == "light" ? "text-black" : "text-white"} hover:text-gray-300 transition duration-300 ${isScrolled ? "text-white" : "text-black"} relative relative-group`}>
               <span className="mr-1"><ImProfile /></span>

@@ -10,6 +10,7 @@ import Login from "./components/Login/Login";
 import Resistors from "./components/Login/Resistors";
 import "./index.css"
 import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/login" element={<Login></Login>}/>
         <Route path="/resistor" element={<Resistors></Resistors>}/>
+        <Route path="/dashboard" element={<Dashboard></Dashboard>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -9,7 +9,7 @@ const Location = () => {
             <h1 className={`mb-6 text-xl text-center font-semibold ${Dark === "light" ? "text-gray-700" : "text-gray-200"}`}>Our Main Branch Location</h1>
             <div className='  md:flex md:flex-row flex flex-col gap-y-5 md:gap-y-0 gap-5'>
 
-                <div data-aos="fade-up-right" data-aos-duration="1000" className='bg-base-100 mx-2 lg:p-8 lg:pb-10 border- border-t-8  shadow-md bg-base-100 border-blue-700 md:mx-0   p-4  rounded-lg'>
+                <div className='bg-base-100 mx-2 lg:p-8 lg:pb-10 border- border-t-8  shadow-md bg-base-100 border-blue-700 md:mx-0   p-4  rounded-lg'>
                     <div className='md:mt-10 mt-5'>
                         <div className="flex items-center   mb-4">
                             <FaMapMarkerAlt className="mr-2 text-gray-700" />
@@ -33,7 +33,7 @@ const Location = () => {
                         <p className={`ml-2 ${Dark === "light" ? "text-gray-700" : "text-gray-500"}`}>Hotel Booking Website</p>
                     </div>
                 </div>
-                <div data-aos="fade-up-left" data-aos-duration="1000" className="flex-1 bg-base-100 md:mx-0 mx-2 border-t-8 border-blue-700 shadow-lg px-4 pt-1 rounded-lg h-[300px]">
+                <div className="flex-1 bg-base-100 md:mx-0 mx-2 border-t-8 border-blue-700 shadow-lg px-4 pt-1 rounded-lg h-[300px]">
                     <div className="relative" style={{ paddingTop: '75%' }}>
                         <iframe
                             className="absolute inset-0 w-full h-[284px] rounded"

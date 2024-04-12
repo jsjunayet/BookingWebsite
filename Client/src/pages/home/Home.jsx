@@ -24,8 +24,6 @@ const Home = () => {
       <Feedback></Feedback>
       <Contact></Contact>
       <Footer></Footer>
-
-
     </div >
   );
 };

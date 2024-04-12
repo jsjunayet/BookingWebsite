@@ -19,15 +19,15 @@ const Profile = () => {
     const { user: users, dispatch } = useContext(AuthContext)
     const [modal, setmodal] = useState(false)
     console.log(users)
-    const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/Booking/${users.userEmail}`)
-    const HandleDelted = (id, before) => {
-        const dateStr1 = new Date().toLocaleDateString()
-        const dateStr2 = before
-        const date1 = new Date(dateStr1)
-        const date2 = new Date(dateStr2)
-        const daydifferent = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24))
-        console.log(daydifferent)
-        if (daydifferent <= 1) {
+    const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking/${users.userEmail}`)
+    const HandleDelted = (id, Duration) => {
+        // const dateStr1 = new Date().toLocaleDateString()
+        // const dateStr2 = before
+        // const date1 = new Date(dateStr1)
+        // const date2 = new Date(dateStr2)
+        // const daydifferent = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24))
+        console.log(Duration)
+        if (Duration <= 1) {
             return Swal.fire({
                 title: "Please check you date",
                 text: "You can cancel a booking before 1 day from the booking day",
@@ -45,7 +45,7 @@ const Profile = () => {
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(`http://localhost:5000/api/Booking/${id}`)
+                    axios.delete(`https://bookingwebsite-2.onrender.com/api/Booking/${id}`)
                         .then(res => {
                             refetch()
                         })
@@ -63,7 +63,7 @@ const Profile = () => {
         console.log(cover, profile)
         const Profile = await imgbbupload(profile)
         const usersInformation = { userName: userName, CoverPik: Cover.data?.url_viewer, ProfilePik: Profile.data?.url_viewer }
-        const res = await axios.put(`http://localhost:5000/api/user/${users?.userEmail}`, usersInformation)
+        const res = await axios.put(`https://bookingwebsite-2.onrender.com/api/user/${users?.userEmail}`, usersInformation)
         const user = res.data
         console.log("updateusers", user)
         if (user) {
@@ -196,7 +196,7 @@ const Profile = () => {
                                                 {item.selectedRoomNumbers.join(', ')}
                                             </div>
                                             <div className="col-span-1 text-3xl cursor-pointer">
-                                                <button onClick={() => HandleDelted(item._id, item.endDate)} className=' bg-red-600 text-white text-[15px] py-[2px] px-2 rounded-xl' >
+                                                <button onClick={() => HandleDelted(item._id, item.Duration)} className=' bg-red-600 text-white text-[15px] py-[2px] px-2 rounded-xl' >
                                                     Cancel
                                                 </button>
                                             </div>

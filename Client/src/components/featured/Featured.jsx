@@ -3,13 +3,13 @@ import Loading from "../Loading/Loading";
 import "./featured.css";
 
 const Featured = () => {
-  const { data, loading, error, refetch } = useFetch("http://localhost:5000/api/hotel/countByCity?cities=dhaka,cumilla,rajshahi,cox's Bazar")
+  const { data, loading, error, refetch } = useFetch("https://bookingwebsite-2.onrender.com/api/hotel/countByCity?cities=dhaka,cumilla,rajshahi,cox's Bazar")
   return (
     <div className=" max-w-5xl mx-auto">
       {
         loading ? <Loading></Loading> : <>
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 md:mx-0 mx-2">
-            <div data-aos="zoom-in-right" data-aos-duration="1000" className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
+            <div className="md:w-[250px] w-full h-[320px] rounded-2xl   border-[5px] border-[#3182CE] relative ">
               <img
                 src="https://i.ibb.co/4dCxkd0/dhaka.jpg"
                 alt=""

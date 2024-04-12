@@ -23,7 +23,7 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModel, setOpenModel] = useState(false);
   const { data, loading, error, refetch } = useFetch(
-    `http://localhost:5000/api/hotel/get/${id}`
+    `https://bookingwebsite-2.onrender.com/api/hotel/get/${id}`
   );
   const { dates, options } = useContext(SearchContext);
   const dayDifferent = (date1, date2) => {

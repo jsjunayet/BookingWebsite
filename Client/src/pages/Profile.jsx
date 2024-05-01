@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import { MdFreeCancellation } from "react-icons/md";
+
 import { AuthContext } from '../Context/AuthContext';
 import axios from "axios"
 import useFetch from '../Hook/useFetch';
@@ -11,30 +13,57 @@ import { MdAddHomeWork } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { MdEditSquare } from "react-icons/md";
 import { imgbbupload } from '../components/Imagbb/ImageUpload';
-
+import { DataGrid } from '@mui/x-data-grid';
 
 const Profile = () => {
+    const { user: users, dispatch } = useContext(AuthContext)
+    const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking/${users.userEmail}`)
+
+    const columns = [
+        { field: 'number', headerName: 'Number', width: 100, padding: 5 },
+        { field: 'roomImage', headerName: 'RoomImage', width: 150 },
+        { field: 'roomName', headerName: 'RoomName', width: 150 },
+        { field: 'location', headerName: 'Location', width: 130 },
+        { field: 'startTime', headerName: 'StartTime', width: 130 },
+        { field: 'endTime', headerName: 'EndTime', width: 120 },
+        { field: 'duration', headerName: 'Duration', width: 120 },
+        { field: 'price', headerName: 'Price', width: 120 },
+        { field: 'roomNumber', headerName: 'RoomNumber', width: 150 },
+        {
+            field: 'action', headerName: 'Action', width: 150, renderCell: (params) => (
+                <MdFreeCancellation onClick={() => handleDelete(params.row._id, params.row.duration)} className=' text-white text-4xl mt-2 cursor-pointer bg-red-800 rounded-md p-[1px]' />
+            )
+        },
+    ];
+
+    const rows = data.map((item, index) => ({
+        id: index + 1,
+        number: index + 1,
+        roomImage: <img src={item?.img} alt="room" className='rounded' />,
+        roomName: item.RoomName,
+        location: item.City,
+        startTime: item.startDate.substring(0, 10),
+        endTime: item.endDate.substring(0, 10),
+        duration: item.Duration,
+        price: item.price,
+        roomNumber: item.selectedRoomNumbers.join(', '),
+        action: 'Cancel',
+        _id: item._id,
+    }));
+
     const { Dark } = useContext(ThemContext)
     const [Load, setLoad] = useState(false)
-    const { user: users, dispatch } = useContext(AuthContext)
-    const [modal, setmodal] = useState(false)
-    console.log(users)
-    const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking/${users.userEmail}`)
-    const HandleDelted = (id, Duration) => {
-        // const dateStr1 = new Date().toLocaleDateString()
-        // const dateStr2 = before
-        // const date1 = new Date(dateStr1)
-        // const date2 = new Date(dateStr2)
-        // const daydifferent = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24))
-        console.log(Duration)
-        if (Duration <= 1) {
+    const [modal, setModal] = useState(false)
+
+    const handleDelete = (id, duration) => {
+        console.log(duration)
+        if (duration <= 1) {
             return Swal.fire({
-                title: "Please check you date",
+                title: "Please check your date",
                 text: "You can cancel a booking before 1 day from the booking day",
                 icon: "error"
             });
-        }
-        else {
+        } else {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -53,6 +82,7 @@ const Profile = () => {
             });
         }
     }
+
     const handleUpdate = async (e) => {
         setLoad(true)
         e.preventDefault()
@@ -68,23 +98,25 @@ const Profile = () => {
         console.log("updateusers", user)
         if (user) {
             dispatch({ type: "AUTH_SUCCESS", payload: user })
-            setmodal(false)
+            setModal(false)
             setLoad(false)
         }
     }
+    console.log(users)
+
     const handleChange = () => {
-        setmodal(true)
+        setModal(true)
     }
-    console.log(data)
+
     return (
         <div className={`${Dark == "light" ? "" : " bg-[#060417] text-gray-300"} h-screen`}>
             <div className="h-64 relative">
-                <img src={`${users.CoverPik ? users.CoverPik : img}`} alt="CoverPhoto" className="w-full h-full object-cover" />
+                <img src="https://ibb.co/FVrMxPk" alt="CoverPhoto" className="w-full h-full object-cover" />
                 {
                     modal &&
-                    <div className="modal-box bg-slate-500 fixed top-0 right-0  w-full h-full flex justify-center items-center">
+                    <div className="modal-box bg-slate-500 z-40 fixed top-0 right-0  w-full h-full flex justify-center items-center">
                         <div className="absolute top-2 right-2">
-                            <button onClick={() => setmodal(false)} className="btn btn-sm btn-circle btn-ghost">
+                            <button onClick={() => setModal(false)} className="btn btn-sm btn-circle btn-ghost">
                                 ✕
                             </button>
                         </div>
@@ -125,14 +157,18 @@ const Profile = () => {
                         </div>
                     </div>
                 }
-                <div className="flex items-center justify-between -mt-16">
+                <div className="flex md:flex-row flex-col justify-center items-center md:justify-between -mt-16">
                     <Link to="/">
-                        <div className='flex text-2xl md:ml-10 ml-1 mt-5 justify-center items-center'>
+                        <div className='md:flex text-2xl md:block hidden md:ml-10 ml-1 mt-5 justify-center items-center'>
                             <MdAddHomeWork className='text-2xl ' /> |  Home
                         </div>
                     </Link>
-                    <div className="bg-white p-2 rounded-full">
-                        <img src={`${users.ProfilePik ? users.ProfilePik : img1}`} alt="Avatar" className="w-32 h-32 rounded-full object-cover" />
+                    <div>
+                        <div className="bg-white p-2 rounded-full">
+                            <img src={`${users.ProfilePik ? users?.ProfilePik : img1}`} alt="Avatar" className="w-32 h-32 rounded-full object-cover" />
+                        </div>
+                        <h1 className="text-2xl font-semibold mt-2">{users?.userName}</h1>
+
                     </div>
 
                     <div className='flex gap-2 md:mr-10 mr-2 mt-5 justify-center items-center text-2xl'>
@@ -140,79 +176,32 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className={`text-center mt-2`}>
-                    <h1 className="text-2xl font-semibold mr-16">{users?.userName}</h1>
                 </div>
             </div>
 
-
             {
-                loading ? <Loading></Loading> :
-                    <div className=' mt-40'>
-
-                        {
-                            data.length > 0 && <div className="mt-5 mb-4">
-                                {/* head */}
-                                <div className="hidden lg:block">
-                                    <dev className=" grid grid-cols-10 text-center text-indigo-200/100 font-semibold text-base  border-b-2 border-indigo-200/50 py-3">
-                                        <p className="col-span-1">Number</p>
-                                        <p className="col-span-1">RoomImage</p>
-                                        <p className="col-span-1">RoomName</p>
-                                        <p className="col-span-1">Location</p>
-                                        <p className="col-span-1">StartTime</p>
-                                        <p className="col-span-1">EndTime</p>
-                                        <p className="col-span-1">Duration</p>
-                                        <p className="col-span-1">Price</p>
-                                        <p className="col-span-1">RoomNumber</p>
-                                        <p className="col-span-1">Action</p>
-
-                                    </dev>
-                                </div>
-
-                                <div className="">
-                                    {data.map((item, index) => (
-                                        <div
-                                            key={item._id}
-                                            className={`${index % 2 === 0
-                                                ? "bg-gray-700 text-white"
-                                                : "bg-gray-300 text-black"
-                                                } text-center font-semibold border-b border-indigo-200/50 space-y-1 lg:grid grid-cols-10 py-3 justify-center items-center`}
-                                        >
-                                            <p className="col-span-1 font-semibold text-center">
-                                                {index + 1}
-                                            </p>
-                                            <div className='col-span-1 w-16 h-10 mx-auto' >
-                                                <img src={item.img} alt="room" className=' rounded' />
-                                            </div>
-                                            <div className="col-span-1">
-                                                <p className="font-bold">{item.RoomName}</p>
-                                            </div>
-
-                                            <p className="col-span-1">{item.City}</p>
-                                            <p className="col-span-1">{item.startDate.substring(0, 10)}</p>
-                                            <p className="col-span-1">{item.endDate.substring(0, 10)}</p>
-                                            <p className="col-span-1">{item.Duration}</p>
-                                            <p className="col-span-1">{item.price}</p>
-                                            <div className="col-span-1">
-                                                {item.selectedRoomNumbers.join(', ')}
-                                            </div>
-                                            <div className="col-span-1 text-3xl cursor-pointer">
-                                                <button onClick={() => HandleDelted(item._id, item.Duration)} className=' bg-red-600 text-white text-[15px] py-[2px] px-2 rounded-xl' >
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
+                loading ? <Loading /> :
+                    <div className='mx-2 md:mx-0'>
+                        <div className='md:mt-40 mt-52  max-w-7xl mx-auto z-10'>
+                            <div style={{ height: 400, width: '100%' }}>
+                                <DataGrid
+                                    rows={rows}
+                                    columns={columns}
+                                    initialState={{
+                                        pagination: {
+                                            paginationModel: { page: 0, pageSize: 5 },
+                                        },
+                                    }}
+                                    pageSizeOptions={[5, 10, 20, 30, 40]}
+                                    getRowClassName={(_, index) =>
+                                        index % 4 === 0 ? 'bg-green-500' : 'bg-gray-300'
+                                    }
+                                />
                             </div>
-                        }
+                        </div>
+
                     </div>
             }
-            <div>
-
-            </div>
-
-
-
         </div>
     );
 };

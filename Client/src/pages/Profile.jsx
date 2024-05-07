@@ -5,8 +5,8 @@ import { AuthContext } from '../Context/AuthContext';
 import axios from "axios"
 import useFetch from '../Hook/useFetch';
 import Loading from '../components/Loading/Loading';
-import img from "../assest/images.jpeg"
-import img1 from "../assest/images.png"
+import img from "../assest/1708456843799.jpeg"
+import img1 from "../assest/images.jpeg"
 import Swal from 'sweetalert2';
 import { ThemContext } from '../Context/ThemContext';
 import { MdAddHomeWork } from "react-icons/md";
@@ -20,14 +20,13 @@ const Profile = () => {
     const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking/${users.userEmail}`)
 
     const columns = [
-        { field: 'number', headerName: 'Number', width: 100, padding: 5 },
-        { field: 'roomImage', headerName: 'RoomImage', width: 150 },
+        { field: 'number', headerName: 'Number', width: 120, padding: 5 },
         { field: 'roomName', headerName: 'RoomName', width: 150 },
-        { field: 'location', headerName: 'Location', width: 130 },
-        { field: 'startTime', headerName: 'StartTime', width: 130 },
-        { field: 'endTime', headerName: 'EndTime', width: 120 },
-        { field: 'duration', headerName: 'Duration', width: 120 },
-        { field: 'price', headerName: 'Price', width: 120 },
+        { field: 'location', headerName: 'Location', width: 150 },
+        { field: 'startTime', headerName: 'StartTime', width: 150 },
+        { field: 'endTime', headerName: 'EndTime', width: 150 },
+        { field: 'duration', headerName: 'Duration', width: 150 },
+        { field: 'price', headerName: 'Price', width: 150 },
         { field: 'roomNumber', headerName: 'RoomNumber', width: 150 },
         {
             field: 'action', headerName: 'Action', width: 150, renderCell: (params) => (
@@ -39,7 +38,6 @@ const Profile = () => {
     const rows = data.map((item, index) => ({
         id: index + 1,
         number: index + 1,
-        roomImage: <img src={item?.img} alt="room" className='rounded' />,
         roomName: item.RoomName,
         location: item.City,
         startTime: item.startDate.substring(0, 10),
@@ -111,7 +109,7 @@ const Profile = () => {
     return (
         <div className={`${Dark == "light" ? "" : " bg-[#060417] text-gray-300"} h-screen`}>
             <div className="h-64 relative">
-                <img src="https://ibb.co/FVrMxPk" alt="CoverPhoto" className="w-full h-full object-cover" />
+                <img src={img1} alt="CoverPhoto" className="w-full h-full object-cover" />
                 {
                     modal &&
                     <div className="modal-box bg-slate-500 z-40 fixed top-0 right-0  w-full h-full flex justify-center items-center">
@@ -163,12 +161,8 @@ const Profile = () => {
                             <MdAddHomeWork className='text-2xl ' /> |  Home
                         </div>
                     </Link>
-                    <div>
-                        <div className="bg-white p-2 rounded-full">
-                            <img src={`${users.ProfilePik ? users?.ProfilePik : img1}`} alt="Avatar" className="w-32 h-32 rounded-full object-cover" />
-                        </div>
-                        <h1 className="text-2xl font-semibold mt-2">{users?.userName}</h1>
-
+                    <div className="bg-white p-2 rounded-full">
+                        <img src={img} alt="Avatar" className="w-32 h-32 rounded-full object-cover" />
                     </div>
 
                     <div className='flex gap-2 md:mr-10 mr-2 mt-5 justify-center items-center text-2xl'>

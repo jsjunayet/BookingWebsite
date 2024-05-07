@@ -16,7 +16,7 @@ const FeaturedProperties = () => {
 
         {
           loading ? <Loading></Loading> :
-            <div className=" grid grid-cols-1 md:grid-cols-3 md:gap-y-3 gap-y-5 gap-4 lg:grid-cols-3">
+            <div className=" grid grid-cols-1 md:grid-cols-2  md:gap-y-3 gap-y-5 gap-4 lg:grid-cols-3">
               {
                 data.map((item, i) => (
                   <div data-aos="flip-right" data-aos-duration={`${(i + 1) * 1000}`} className=" bg-base-100 shadow-lg   rounded-xl overflow-hidden">

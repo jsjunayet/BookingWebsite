@@ -1,38 +1,13 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
-import List from './pages/list/List';
-import Single from './pages/single/Single';
-import New from './pages/new/New';
-import { productInputs, userInputs } from './formSource';
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../Dashboard/components/sidebar/Sidebar';
 
 
 const Dashboard = () => {
     return (
-        <div>
-            <Routes>
-                <Route path="/">
-                    <Route index element={<Home />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="/users">
-                        <Route index element={<List />} />
-                        <Route path=":userId" element={<Single />} />
-                        <Route
-                            path="new"
-                            element={<New inputs={userInputs} title="Add New User" />}
-                        />
-                    </Route>
-                    <Route path="/products">
-                        <Route index element={<List />} />
-                        <Route path=":productId" element={<Single />} />
-                        <Route
-                            path="new"
-                            element={<New inputs={productInputs} title="Add New Product" />}
-                        />
-                    </Route>
-                </Route>
-            </Routes>
+        <div className='flex gap-2'>
+            
+            <Outlet />
         </div>
     );
 };

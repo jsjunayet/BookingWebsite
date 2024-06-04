@@ -13,8 +13,6 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-
-
   return (
     <div className="flex flex-col h-screen border-r border-gray-300 bg-white">
       <div className="top h-16 flex items-center justify-center">
@@ -28,16 +26,16 @@ const Sidebar = () => {
           <p className="title">MAIN</p>
           <li className="flex items-center py-2 cursor-pointer">
             <DashboardIcon className="icon text-gray-500" />
-            <span className="ml-2 text-gray-800">Dashboard</span>
+            <Link to="/dashboard" className="ml-2 text-gray-800">Dashboard</Link>
           </li>
           <p className="title">LISTS</p>
-          <Link to="/users" className="text-decoration-none">
+          <Link to="/dashboard/users" className="text-decoration-none">
             <li className="flex items-center py-2 cursor-pointer">
               <PersonOutlineIcon className="icon text-gray-500" />
               <span className="ml-2 text-gray-800">Users</span>
             </li>
           </Link>
-          <Link to="/products" className="text-decoration-none">
+          <Link to="/dashboard/products" className="text-decoration-none">
             <li className="flex items-center py-2 cursor-pointer">
               <StoreIcon className="icon text-gray-500" />
               <span className="ml-2 text-gray-800">Products</span>
@@ -87,15 +85,12 @@ const Sidebar = () => {
       <div className="bottom mt-auto mx-4">
         <div
           className="colorOption w-6 h-6 border border-indigo-700 cursor-pointer mb-2"
-
         ></div>
         <div
           className="colorOption w-6 h-6 bg-gray-800 border border-indigo-700 cursor-pointer mb-2"
-
         ></div>
         <div
           className="colorOption w-6 h-6 bg-blue-900 border border-indigo-700 cursor-pointer"
-
         ></div>
       </div>
     </div>

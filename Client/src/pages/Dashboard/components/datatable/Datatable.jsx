@@ -17,7 +17,7 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="flex items-center gap-5">
-            <Link to="/users/test" className="text-blue-500 hover:underline">
+            <Link to="/dashboard/users/:userId" className="text-blue-500 hover:underline">
               View
             </Link>
             <div
@@ -36,7 +36,7 @@ const Datatable = () => {
     <div className="bg-white shadow-md p-5 h-600">
       <div className="flex items-center justify-between mb-5">
         <div className="text-gray-500 text-2xl">Add New User</div>
-        <Link to="/users/new" className="text-green-500 hover:bg-green-100 py-2 px-4 rounded-md">
+        <Link to="/dashboard/users/new" className="text-green-500 hover:bg-green-100 py-2 px-4 rounded-md">
           Add New
         </Link>
       </div>

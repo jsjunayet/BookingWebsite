@@ -21,7 +21,7 @@ const Login = () => {
         console.log(email, password)
         dispatch({ type: "AUTH_STAER" })
         try {
-            const res = await axios.post('https://bookingwebsite-2.onrender.com/api/auth/login', { userEmail: email, password: password })
+            const res = await axios.post('http://localhost:5000/api/auth/login', { userEmail: email, password: password })
             const user = res?.data
             console.log(user)
             dispatch({ type: "AUTH_SUCCESS", payload: user })

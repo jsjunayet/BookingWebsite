@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col h-screen border-r border-gray-300 bg-white">
+    <div className="flex flex-col h-screen border-r border-gray-300 bg-white text-sm">
       <div className="top h-16 flex items-center justify-center">
         <Link to="/" className="logo text-lg font-bold text-indigo-700">
           Booking website
@@ -25,59 +25,59 @@ const Sidebar = () => {
         <ul>
           <p className="title">MAIN</p>
           <li className="flex items-center py-2 cursor-pointer">
-            <DashboardIcon className="icon text-gray-500" />
+            <DashboardIcon className="icon text-indigo-700" />
             <Link to="/dashboard" className="ml-2 text-gray-800">Dashboard</Link>
           </li>
           <p className="title">LISTS</p>
           <Link to="/dashboard/users" className="text-decoration-none">
             <li className="flex items-center py-2 cursor-pointer">
-              <PersonOutlineIcon className="icon text-gray-500" />
+              <PersonOutlineIcon className="icon text-indigo-700" />
               <span className="ml-2 text-gray-800">Users</span>
             </li>
           </Link>
           <Link to="/dashboard/products" className="text-decoration-none">
             <li className="flex items-center py-2 cursor-pointer">
-              <StoreIcon className="icon text-gray-500" />
+              <StoreIcon className="icon text-indigo-700" />
               <span className="ml-2 text-gray-800">Products</span>
             </li>
           </Link>
           <li className="flex items-center py-2 cursor-pointer">
-            <CreditCardIcon className="icon text-gray-500" />
+            <CreditCardIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Orders</span>
           </li>
           <li className="flex items-center py-2 cursor-pointer">
-            <LocalShippingIcon className="icon text-gray-500" />
+            <LocalShippingIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Delivery</span>
-          </li>
+          </li>a
           <p className="title">USEFUL</p>
           <li className="flex items-center py-2 cursor-pointer">
-            <InsertChartIcon className="icon text-gray-500" />
+            <InsertChartIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Stats</span>
           </li>
           <li className="flex items-center py-2 cursor-pointer">
-            <NotificationsNoneIcon className="icon text-gray-500" />
+            <NotificationsNoneIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Notifications</span>
           </li>
           <p className="title">SERVICE</p>
           <li className="flex items-center py-2 cursor-pointer">
-            <SettingsSystemDaydreamOutlinedIcon className="icon text-gray-500" />
+            <SettingsSystemDaydreamOutlinedIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">System Health</span>
           </li>
           <li className="flex items-center py-2 cursor-pointer">
-            <PsychologyOutlinedIcon className="icon text-gray-500" />
+            <PsychologyOutlinedIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Logs</span>
           </li>
           <li className="flex items-center py-2 cursor-pointer">
-            <SettingsApplicationsIcon className="icon text-gray-500" />
+            <SettingsApplicationsIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Settings</span>
           </li>
           <p className="title">USER</p>
           <li className="flex items-center py-2 cursor-pointer">
-            <AccountCircleOutlinedIcon className="icon text-gray-500" />
+            <AccountCircleOutlinedIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Profile</span>
           </li>
           <li className="flex items-center py-2 cursor-pointer">
-            <ExitToAppIcon className="icon text-gray-500" />
+            <ExitToAppIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Logout</span>
           </li>
         </ul>

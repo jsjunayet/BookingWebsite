@@ -14,6 +14,7 @@ import { MdOutlineDarkMode } from "react-icons/md";
 
 const Navbar = () => {
   const { user, dispatch, loading, error } = useContext(AuthContext)
+  console.log(user)
   const { Dark, setDark } = useContext(ThemContext)
   const handleChange = () => {
     setDark((prev) => prev === "light" ? "dark" : "light")
@@ -125,7 +126,7 @@ const Navbar = () => {
               ))}
             </div> : ""
           }
-          {user && <Link to='/dashboard'>
+          {user?.isAdmin && <Link to='/dashboard'>
             <div className={`flex items-center text-white hover:text-gray-300 transition duration-300 relative relative-group`}>
               <span className="mr-1"><MdDashboard /></span>
               Dashboard

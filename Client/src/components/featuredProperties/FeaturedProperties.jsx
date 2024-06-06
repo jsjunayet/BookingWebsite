@@ -8,7 +8,7 @@ import { ThemContext } from "../../Context/ThemContext";
 
 const FeaturedProperties = () => {
   const { Dark } = useContext(ThemContext)
-  const { data, loading, error, refetch } = useFetch('https://bookingwebsite-2.onrender.com/api/hotel?feautre=true')
+  const { data, loading, error, refetch } = useFetch('http://localhost:5000/api/hotel?feautre=true')
   return (
     <div className=" max-w-5xl mx-auto pb-10">
       <div className="mx-2 md:mx-0">

@@ -6,7 +6,7 @@ import { ThemContext } from "../../Context/ThemContext";
 
 const PropertyList = () => {
   const { Dark } = useContext(ThemContext)
-  const { data, loading, error, refetch } = useFetch('https://bookingwebsite-2.onrender.com/api/hotel/countBytype')
+  const { data, loading, error, refetch } = useFetch('http://localhost:5000/api/hotel/countBytype')
   const images = [
     "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg",

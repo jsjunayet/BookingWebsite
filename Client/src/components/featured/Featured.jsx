@@ -3,7 +3,7 @@ import Loading from "../Loading/Loading";
 import "./featured.css";
 
 const Featured = () => {
-  const { data, loading, error, refetch } = useFetch("https://bookingwebsite-2.onrender.com/api/hotel/countByCity?cities=dhaka,cumilla,rajshahi,cox's Bazar")
+  const { data, loading, error, refetch } = useFetch("http://localhost:5000/api/hotel/countByCity?cities=dhaka,cumilla,rajshahi,cox's Bazar")
   return (
     <div className=" max-w-5xl mx-auto">
       {

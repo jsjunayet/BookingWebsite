@@ -16,8 +16,12 @@ import Single from './pages/Dashboard/pages/single/Single.jsx';
 import New from './pages/Dashboard/pages/new/New.jsx';
 import { productInputs, userInputs } from './pages/Dashboard/formSource.js';
 import './index.css';
+import { AuthContext } from "./Context/AuthContext.jsx";
+import { useContext } from "react";
 
 function App() {
+  const {user}= useContext(AuthContext)
+  console.log(user)
   return (
     <BrowserRouter>
       <Routes>

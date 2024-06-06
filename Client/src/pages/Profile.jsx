@@ -17,7 +17,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const Profile = () => {
     const { user: users, dispatch } = useContext(AuthContext)
-    const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking/${users.userEmail}`)
+    const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/Booking/${users.userEmail}`)
 
     const columns = [
         { field: 'number', headerName: 'Number', width: 120, padding: 5 },
@@ -72,7 +72,7 @@ const Profile = () => {
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(`https://bookingwebsite-2.onrender.com/api/Booking/${id}`)
+                    axios.delete(`http://localhost:5000/api/Booking/${id}`)
                         .then(res => {
                             refetch()
                         })
@@ -91,7 +91,7 @@ const Profile = () => {
         console.log(cover, profile)
         const Profile = await imgbbupload(profile)
         const usersInformation = { userName: userName, CoverPik: Cover.data?.url_viewer, ProfilePik: Profile.data?.url_viewer }
-        const res = await axios.put(`https://bookingwebsite-2.onrender.com/api/user/${users?.userEmail}`, usersInformation)
+        const res = await axios.put(`http://localhost:5000/api/user/${users?.userEmail}`, usersInformation)
         const user = res.data
         console.log("updateusers", user)
         if (user) {

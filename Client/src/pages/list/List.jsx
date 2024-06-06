@@ -19,7 +19,7 @@ const List = () => {
   const [openDate, setOpenDate] = useState(false);
 
   const [options, setOptions] = useState(location.state.options);
-  const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/hotel?city=${destination || null}&min=${min || 0}&max=${max || 999}`)
+  const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel?city=${destination || null}&min=${min || 0}&max=${max || 999}`)
 
   const handleClick = () => {
     refetch()

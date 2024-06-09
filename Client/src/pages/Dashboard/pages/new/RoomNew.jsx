@@ -7,23 +7,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const New = ({ inputs, title }) => {
+const RoomNew = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setinfo]=useState({})
   const [loading, setloading]=useState(false)
   const handlechange = (e)=>{
     setinfo(prev=>({...prev, [e.target.id]: e.target.value}))
   }
-
-  const [isAdmin, setIsAdmin] = useState(null)
-  const handleRoleChange = (e) => {
-    const roleValue = e.target.value === "admin" ? true : false;
-    setIsAdmin(roleValue);
-  };
   const resetForm = () => {
     setFile(null);
     setinfo({});
-    setIsAdmin(null);
   };
   const handleClick = async (e)=>{
     setloading(true)
@@ -37,8 +30,6 @@ const New = ({ inputs, title }) => {
       const {url}=uploadres.data
       const newuser = {
         ...info,
-        ProfilePik: url,
-        isAdmin:isAdmin
       }
       console.log(newuser)
      const res = await axios.post("http://localhost:5000/api/auth/Resistor",newuser);
@@ -92,7 +83,7 @@ const New = ({ inputs, title }) => {
              <div className="grid grid-cols-2 gap-10">
              {inputs.map((input) => (
                 <div className="w-full" key={input.id}>
-                  <label  className="capitalize">{input.label}</label>
+                  <label className="capitalize">{input.label}</label>
                   <input
                   onChange={handlechange}
                     type={input.type}
@@ -102,17 +93,6 @@ const New = ({ inputs, title }) => {
                   />
                 </div>
               ))}
-               <div className="w-full">
-                  <label>Role</label>
-                  <select
-                    onChange={handleRoleChange}
-                    className="w-full p-1 border-b border-gray-400 focus:outline-none"
-                  >
-                    <option value="" disabled>Select Role</option>
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                  </select>
-                </div>
                 
               <button disabled={loading} onClick={handleClick} className=" p-2 bg-teal-600 text-white font-bold cursor-pointer mt-2 ">
                 {
@@ -129,4 +109,4 @@ const New = ({ inputs, title }) => {
   );
 };
 
-export default New;
+export default RoomNew;

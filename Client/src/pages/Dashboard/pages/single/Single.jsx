@@ -16,13 +16,13 @@ const Single = () => {
                 Edit
               </div>
               <h1 className="text-xl font-semibold text-gray-500 mb-5">Information</h1>
-              <div className="flex items-center gap-5">
+              <div className="flex items-center mt-20 gap-5">
                 <img
                   src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
                   alt=""
                   className="w-20 h-20 rounded-full object-cover"
                 />
-                <div>
+                <div className=" text-sm">
                   <h1 className="text-lg font-semibold">Jane Doe</h1>
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-1">
@@ -46,7 +46,7 @@ const Single = () => {
               </div>
             </div>
             <div className="flex-2">
-              <Chart aspect="3/1" title="User Spending (Last 6 Months)" />
+            <Chart title="User Spending (Last 6 Months)" aspect={2 / 1} />
             </div>
           </div>
           <div className="bg-white shadow-md p-5 mt-5">

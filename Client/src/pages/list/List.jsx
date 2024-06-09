@@ -57,13 +57,13 @@ const List = () => {
                   <span className="text-gray-200">
                     Min price <small>(per night)</small>
                   </span>
-                  <input onChange={(e) => setMin(e.target.value)} type="number" className="w-20 border border-gray-300 rounded" />
+                  <input onChange={(e) => setMin(e.target.value)} type="number" className="w-20 border border-gray-300 text-gray-500 rounded" />
                 </div>
                 <div className="flex justify-between mb-2">
                   <span className="text-gray-200">
                     Max price <small>(per night)</small>
                   </span>
-                  <input type="number" onChange={(e) => setMax(e.target.value)} className="w-20 border border-gray-300 rounded" />
+                  <input type="number" onChange={(e) => setMax(e.target.value)} className="w-20 border border-gray-300 text-gray-500 rounded" />
                 </div>
                 <div className="flex justify-between mb-2">
                   <span className="text-gray-200">Adult</span>

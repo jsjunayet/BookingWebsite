@@ -10,13 +10,22 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { FaHome } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../../Context/AuthContext";
 
 const Sidebar = () => {
+  const { user, dispatch, loading, error } = useContext(AuthContext)
+  const handleout = () => {
+    localStorage.removeItem("USER")
+    dispatch({ type: "LOGOUT" })
+  }
   return (
     <div className="flex flex-col h-screen border-r border-gray-300 bg-white text-sm">
       <div className="top h-16 flex items-center justify-center">
-        <Link to="/" className="logo text-lg font-bold text-indigo-700">
+        <Link to="/dashboard" className="logo text-lg font-bold text-indigo-700">
           Booking website
         </Link>
       </div>
@@ -35,20 +44,25 @@ const Sidebar = () => {
               <span className="ml-2 text-gray-800">Users</span>
             </li>
           </Link>
-          <Link to="/dashboard/products" className="text-decoration-none">
+          <Link to="/dashboard/hotel" className="text-decoration-none">
             <li className="flex items-center py-2 cursor-pointer">
               <StoreIcon className="icon text-indigo-700" />
-              <span className="ml-2 text-gray-800">Products</span>
+              <span className="ml-2 text-gray-800">Hotels</span>
             </li>
           </Link>
+          <Link to="/dashboard/room" className="text-decoration-none">
           <li className="flex items-center py-2 cursor-pointer">
             <CreditCardIcon className="icon text-indigo-700" />
-            <span className="ml-2 text-gray-800">Orders</span>
+            <span className="ml-2 text-gray-800">Rooms</span>
           </li>
+          </Link>
+          <Link to="/dashboard/Booking" className="text-decoration-none">
           <li className="flex items-center py-2 cursor-pointer">
             <LocalShippingIcon className="icon text-indigo-700" />
-            <span className="ml-2 text-gray-800">Delivery</span>
-          </li>a
+            <span className="ml-2 text-gray-800">Orders</span>
+          </li>
+          </Link>
+         
           <p className="title">USEFUL</p>
           <li className="flex items-center py-2 cursor-pointer">
             <InsertChartIcon className="icon text-indigo-700" />
@@ -58,40 +72,28 @@ const Sidebar = () => {
             <NotificationsNoneIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Notifications</span>
           </li>
-          <p className="title">SERVICE</p>
-          <li className="flex items-center py-2 cursor-pointer">
-            <SettingsSystemDaydreamOutlinedIcon className="icon text-indigo-700" />
-            <span className="ml-2 text-gray-800">System Health</span>
-          </li>
-          <li className="flex items-center py-2 cursor-pointer">
-            <PsychologyOutlinedIcon className="icon text-indigo-700" />
-            <span className="ml-2 text-gray-800">Logs</span>
-          </li>
           <li className="flex items-center py-2 cursor-pointer">
             <SettingsApplicationsIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Settings</span>
           </li>
           <p className="title">USER</p>
+          <Link to={"/"}>
+          <li className="flex items-center py-2 cursor-pointer">
+          <FaHome className="text-indigo-700 text-2xl"/>
+            <span className="ml-2 text-gray-800">Home</span>
+          </li>
+          </Link>
+          <Link to={"/dashboard/profile"}>
           <li className="flex items-center py-2 cursor-pointer">
             <AccountCircleOutlinedIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Profile</span>
           </li>
-          <li className="flex items-center py-2 cursor-pointer">
+          </Link>
+          <li onClick={handleout} className="flex items-center py-2 cursor-pointer">
             <ExitToAppIcon className="icon text-indigo-700" />
             <span className="ml-2 text-gray-800">Logout</span>
           </li>
         </ul>
-      </div>
-      <div className="bottom mt-auto mx-4">
-        <div
-          className="colorOption w-6 h-6 border border-indigo-700 cursor-pointer mb-2"
-        ></div>
-        <div
-          className="colorOption w-6 h-6 bg-gray-800 border border-indigo-700 cursor-pointer mb-2"
-        ></div>
-        <div
-          className="colorOption w-6 h-6 bg-blue-900 border border-indigo-700 cursor-pointer"
-        ></div>
       </div>
     </div>
   );

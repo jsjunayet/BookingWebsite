@@ -4,11 +4,10 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 
-const Widget = ({ type }) => {
+const Widget = ({ type, count, amount }) => {
   let data;
 
   // Temporary data
-  const amount = 100;
   const diff = 20;
 
   switch (type) {
@@ -17,6 +16,7 @@ const Widget = ({ type }) => {
         title: "USERS",
         isMoney: false,
         link: "See all users",
+        count: count,
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -33,6 +33,7 @@ const Widget = ({ type }) => {
         title: "ORDERS",
         isMoney: false,
         link: "View all orders",
+        count: count, // Use the count prop
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -49,6 +50,7 @@ const Widget = ({ type }) => {
         title: "EARNINGS",
         isMoney: true,
         link: "View net earnings",
+        amount: amount, // Use the amount prop
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
@@ -62,6 +64,7 @@ const Widget = ({ type }) => {
         title: "BALANCE",
         isMoney: true,
         link: "See details",
+        amount: amount, // Use the amount prop
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="icon"
@@ -81,7 +84,7 @@ const Widget = ({ type }) => {
     <div className="widget flex justify-between p-4 shadow-lg rounded-lg h-24">
       <div className="left">
         <span className="font-bold text-gray-600 text-sm">{data.title}</span>
-        <span className="text-2xl font-light">{data.isMoney && "$"} {amount}</span>
+        <span className="text-2xl font-light">{data.isMoney && "$"} {data.amount ? data.amount : data.count}</span> {/* Display amount or count */}
         <span className="text-xs text-gray-500">{data.link}</span>
       </div>
       <div className="right flex flex-col justify-between items-end">
@@ -96,3 +99,4 @@ const Widget = ({ type }) => {
 };
 
 export default Widget;
+

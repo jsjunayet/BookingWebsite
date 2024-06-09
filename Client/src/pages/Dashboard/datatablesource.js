@@ -3,39 +3,137 @@ export const userColumns = [
   {
     field: "user",
     headerName: "User",
-    width: 230,
+    width: 200,
     renderCell: (params) => {
       return (
-        <div className="cellWithImg">
-          <img className="cellImg" src={params.row.img} alt="avatar" />
-          {params.row.username}
+        <div className="flex item-center gap-2 ">
+          <img className="w-10 h-10 rounded-full mt-1" src={params.row.ProfilePik || "https://i.ibb.co/RHSLGWS/download-1.png"} alt="avatar" />
+          <span>{params.row.userName}</span>
         </div>
       );
     },
   },
   {
-    field: "email",
+    field: "userEmail",
     headerName: "Email",
-    width: 230,
+    width: 210,
   },
 
   {
-    field: "age",
-    headerName: "Age",
+    field: "city",
+    headerName: "City",
     width: 100,
   },
   {
-    field: "status",
-    headerName: "Status",
-    width: 160,
+    field: "phone",
+    headerName: "Phone",
+    width: 150,
+  },
+  {
+    field: "country",
+    headerName: "Country",
+    width: 150,
+  },
+  
+];
+export const RoomColumns = [
+  { field: "_id", headerName: "ID", width: 250 },
+  {
+    field: "title",
+    headerName: "Title",
+    width: 210,
+  },
+
+  {
+    field: "price",
+    headerName: "Price",
+    width: 100,
+  },
+  {
+    field: "maxPeople",
+    headerName: "MaxPeople",
+    width: 150,
+  },
+  {
+    field: "desc",
+    headerName: "Description",
+    width: 150,
+  },
+  
+];
+export const hotelColumns = [
+  { field: "id", headerName: "ID", width: 70 },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 150,
+  },
+  {
+    field: "title",
+    headerName: "Title",
+    width: 210,
+  },
+
+  {
+    field: "city",
+    headerName: "City",
+    width: 100,
+  },
+
+  {
+    field: "price",
+    headerName: "Price",
+    width: 150,
+  },
+  {
+    field: "rating",
+    headerName: "Rating",
+    width: 150,
+  },
+  
+];
+export const BookingColumns = [
+  {
+    field: "email",
+    headerName: "Email",
+    width: 200,
+  },
+  {
+    field: "RoomName",
+    headerName: "RoomName",
+    width: 150,
+  },
+
+  {
+    field: "startDate",
+    headerName: "startDate",
+    width: 150,
     renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.status}
-        </div>
-      );
+      const date = params.value.split('T')[0];
+      return <span>{date}</span>;
     },
   },
+
+  {
+    field: "endDate",
+    headerName:"EndDate",
+    width: 150,
+    renderCell: (params) => {
+      const date = params.value.split('T')[0];
+      return <span>{date}</span>;
+    },
+  },
+  {
+    field:"selectedRoomNumbers",
+    headerName: "RoomNumbers",
+    width: 150,
+  },
+  {
+    field:"price",
+    headerName: "Price",
+    width: 100,
+  },
+  
 ];
 
 //temporary data

@@ -1,13 +1,44 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { userRows, userColumns } from '../../datatablesource';
-const Datatable = () => {
-  const [data, setData] = useState(userRows);
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {  userColumns } from '../../datatablesource';
+import useFetch from "../../../../Hook/useFetch"
+import axios from 'axios';
+const Datatable = ({colums}) => {
+  const location = useLocation()
+  const path = location.pathname.split("/")[2]
+const [List,setList]=useState([])
+const {data:datas, loading, error, refetch}= useFetch(`http://localhost:5000/api/${path}`)
+console.log(datas.isAdmin)
+useEffect(()=>{
+  setList(datas)
+},[datas])
+const handleToggleRole = async (id, currentRole) => {
+  try {
+    const newRole = !currentRole; // Toggle the role
+    const res = await axios.patch(`http://localhost:5000/api/${path}/admin/${id}`, { isAdmin: newRole });
+    setList((prevList) => 
+      prevList.map((item) => (item._id === id ? { ...item, isAdmin: newRole } : item))
+    );
+    console.log(res.data);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = async(id) => {
+    try{
+      await axios.delete(`http://localhost:5000/api/${path}/${id}`)
+      setList(List.filter((item) => item._id !== id));
+    }catch(err){
+      console.log(err.message)
+    }
+    
   };
+  const rowsWithSequentialIDs = List.map((item, index) => ({
+    ...item,
+    id: index + 1,
+  }));
 
   const actionColumn = [
     {
@@ -22,10 +53,19 @@ const Datatable = () => {
             </Link>
             <div
               className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             >
               Delete
             </div>
+            {
+              params?.row?.password
+              && <div
+              className="text-green-500 cursor-pointer"
+              onClick={() => handleToggleRole(params.row._id, params.row.isAdmin)}
+            >
+              {params?.row?.isAdmin?"Admin":"user"}
+            </div>
+            }
           </div>
         );
       },
@@ -35,18 +75,19 @@ const Datatable = () => {
   return (
     <div className="bg-white shadow-md p-5 h-600">
       <div className="flex items-center justify-between mb-5">
-        <div className="text-gray-500 text-2xl">Add New User</div>
-        <Link to="/dashboard/users/new" className="text-green-500 hover:bg-green-100 py-2 px-4 rounded-md">
+        <div className="text-gray-500 text-2xl uppercase">{path}</div>
+        <Link to={`/dashboard/${path}/new`} className="text-green-500 hover:bg-green-100 py-2 px-4 rounded-md">
           Add New
         </Link>
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
+        rows={rowsWithSequentialIDs}
+        columns={colums.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
+        getRowId={row=>row._id}
       />
     </div>
   );

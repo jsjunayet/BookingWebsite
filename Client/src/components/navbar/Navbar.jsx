@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { IoIosHome } from "react-icons/io";
 import { FiMenu, FiX } from "react-icons/fi";
 import { motion, useAnimation } from "framer-motion";
-import { MdOutlineContactPhone } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { AuthContext } from "../../Context/AuthContext";
@@ -20,7 +19,6 @@ const Navbar = () => {
     setDark((prev) => prev === "light" ? "dark" : "light")
   }
   const location = useLocation()
-
   const handleout = () => {
     localStorage.removeItem("USER")
     dispatch({ type: "LOGOUT" })
@@ -56,16 +54,12 @@ const Navbar = () => {
 
       setPrevScrollPos(currentScrollPos);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos, controls]);
-
   const closeMenu = () => setOpen(false);
-
   return (
     <motion.nav
       className={`fixed top-0 left-0 w-full  ${Dark === "light" ? "" : "bg-gray-900"} z-50  ${isScrolled ? 'bg-[#060417]' : ' bg-transparent'}`}
@@ -82,7 +76,6 @@ const Navbar = () => {
           <Link to="/">
             <h1 className={`text-2xl cursor-pointer font-bold ${isScrolled ? 'text-white ' : ' text-[#3182CE]'}`}>ONLINE_<span className="text-[#febb02]">BOOKING</span></h1>
           </Link>
-
           <div className="block ml-16 md:hidden">
             {
               Dark === "light" ? <MdOutlineLightMode onClick={handleChange} className={`text-2xl cursor-pointer ${isScrolled ? 'text-white' : ' text-black'}`} /> :
@@ -127,7 +120,7 @@ const Navbar = () => {
             </div> : ""
           }
           {user?.isAdmin && <Link to='/dashboard'>
-            <div className={`flex items-center text-white hover:text-gray-300 transition duration-300 relative relative-group`}>
+            <div className={`flex items-center  hover:text-gray-300 ${Dark == "light" ? "text-black" : "text-white"}  ${isScrolled ? "text-white" : "text-black"} transition duration-300 relative relative-group`}>
               <span className="mr-1"><MdDashboard /></span>
               Dashboard
               {location.pathname === "/dashboard" && (

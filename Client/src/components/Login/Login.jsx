@@ -25,7 +25,11 @@ const Login = () => {
             const user = res?.data
             console.log(user)
             dispatch({ type: "AUTH_SUCCESS", payload: user })
+           if(loaction.state===null){
+            navigate("/")
+           }else{
             navigate(`/hotels/${loaction.state}`)
+           }
         } catch (err) {
             dispatch({ type: "AUTH_Fail", payload: err.message })
 

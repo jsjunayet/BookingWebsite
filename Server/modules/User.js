@@ -23,6 +23,19 @@ const UserSchema = new Schema({
     },
     CoverPik:{
         type: String
-    }
+    },
+    city:{
+        type:String,
+    
+    },
+    phone:{
+        type:String,
+        
+    },
+    country:{
+        type:String,
+        
+    },
+
 }, {timestamps:true})
 export default mongoose.model("User",UserSchema)

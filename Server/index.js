@@ -19,13 +19,12 @@ app.use(express.json());
 
 const connect = async () => {
   try {
-    await mongoose.connect("mongodb+srv://booking_website:FXzqWfhJjQhsyEgw@cluster0.l4anbhy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+    await mongoose.connect(process.env.MONGO);
     console.log("Connected to MongoDB");
   } catch (error) {
     throw error;
   }
 };
-
 // Middleware
 app.use(cors());
 app.get("/",(req,res)=>{
@@ -36,7 +35,7 @@ app.get("/",(req,res)=>{
 // Routes
 app.use("/api/auth", authrouter);
 app.use("/api/hotel", hotelsrouter);
-app.use("/api/user", UserRouter);
+app.use("/api/users", UserRouter);
 app.use("/api/room", Roomsrouter);
 app.use("/api/Booking", BookingRoute);
 

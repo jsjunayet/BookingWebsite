@@ -1,4 +1,5 @@
 import { createError } from "../Utiltes/CreateError.js";
+import Booking from "../modules/Booking.js";
 import User from "../modules/User.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
@@ -7,8 +8,7 @@ export const Resistor = async(req,res,next)=>{
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
     const newResistor = new User({
-        userName: req.body.userName,
-        userEmail: req.body.userEmail,
+        ...req.body,
         password: hash,
     })
     try{
@@ -30,6 +30,7 @@ export const Login = async(req,res,next)=>{
   
     try{
         const user = await User.findOne({userEmail: req.body.userEmail})
+        console.log(user)
         if(!user) return next(createError(404, "Please Correct Email"));
         const isPassword = await bcrypt.compare(req.body.password, user.password )
         if(!isPassword) return next(createError(404, "Please Correct Password"))
@@ -40,4 +41,9 @@ export const Login = async(req,res,next)=>{
     }catch (err){
         next(err)
     }
+}
+export const Allinformation = async(req,res,next)=>{
+    const user = await User.countDocuments()
+    const order = await Booking.countDocuments()
+res.status(200).json({user,order})
 }

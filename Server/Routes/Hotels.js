@@ -6,7 +6,7 @@ const hotelsrouter = express.Router()
 
 hotelsrouter.post("/", posthotel)
 hotelsrouter.put("/:id", verifyAdmin, UpdateHotel)
-hotelsrouter.delete("/find/:id",verifyAdmin, DeletedHotel)
+hotelsrouter.delete("/:id", DeletedHotel)
 hotelsrouter.get("/get/:id",SingleGetHotel)
 hotelsrouter.get("/",AllGetHotel)
 hotelsrouter.get("/room/:id",GetHotelRoom)

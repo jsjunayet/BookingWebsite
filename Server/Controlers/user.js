@@ -40,6 +40,20 @@ export const UpdateUser = async (req, res, next) => {
         next(err);
     }
 };
+export const UpdateAdmin = async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const { isAdmin } = req.body; // Get the isAdmin value from the request body
+      const updatedUser = await User.findByIdAndUpdate(id, { isAdmin }, { new: true });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const { password, ...otherDetails } = updatedUser._doc;
+      res.status(200).json({ ...otherDetails });
+    } catch (err) {
+      next(err);
+    }
+  };
 // Delelted methods
 export const DeletedUser = async(req,res,next)=>{
     try{

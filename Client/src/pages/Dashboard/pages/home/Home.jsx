@@ -7,9 +7,9 @@ import Chart from "../../components/chart/Chart"
 import useFetch from '../../../../Hook/useFetch';
 
 const Home = () => {
-  const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/Booking`)
-  const { data:latest } = useFetch(`http://localhost:5000/api/Booking//selles/latest`)
-  const { data: datas, } = useFetch(`http://localhost:5000/api/auth/all`)
+  const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking`)
+  const { data:latest } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking//selles/latest`)
+  const { data: datas, } = useFetch(`https://bookingwebsite-2.onrender.com/api/auth/all`)
   const total = data.reduce((accumulator, currentValue) => accumulator + parseFloat(currentValue.price), 0);
   console.log(latest)
   

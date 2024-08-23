@@ -13,7 +13,7 @@ const HotelNew = ({ inputs, title }) => {
   const [info, setInfo] = useState({});
   const [feature, setFeature] = useState(false);
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data: rooms, loading:load, error, refetch } = useFetch(`http://localhost:5000/api/room`);
+  const { data: rooms, loading:load, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/room`);
 
   const [loading, setLoading] = useState(false);
 
@@ -54,7 +54,7 @@ const HotelNew = ({ inputs, title }) => {
       };
       console.log(newHotel)
 
-      const res = await axios.post("http://localhost:5000/api/hotel", newHotel);
+      const res = await axios.post("https://bookingwebsite-2.onrender.com/api/hotel", newHotel);
       
       if (res.data) {
         toast.success("Successfully added.");

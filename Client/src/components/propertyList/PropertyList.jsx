@@ -3,10 +3,11 @@ import useFetch from "../../Hook/useFetch";
 import Loading from "../Loading/Loading";
 import "./propertyList.css";
 import { ThemContext } from "../../Context/ThemContext";
+import PropertyListSkeleton from "../SkeletonCompent/PropertyListSkeleton";
 
 const PropertyList = () => {
   const { Dark } = useContext(ThemContext)
-  const { data, loading, error, refetch } = useFetch('http://localhost:5000/api/hotel/countBytype')
+  const { data, loading, error, refetch } = useFetch('https://bookingwebsite-2.onrender.com/api/hotel/countBytype')
   const images = [
     "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg",
@@ -19,11 +20,11 @@ const PropertyList = () => {
       <div className=" md:mx-0 mx-2">
         <h1 className={`my-6 text-xl font-semibold ${Dark === "light" ? "text-gray-700" : "text-gray-200"}`}>"Kindly peruse by property type."</h1>
 
-        <div className="grid md:grid-cols-5 grid-cols-2 gap-2">
+        <div >
           {
-            loading ? <Loading></Loading> : (
+            loading ? <PropertyListSkeleton/> : (
 
-              <>
+              <div className="grid md:grid-cols-5 grid-cols-2 gap-2">
                 {
                   images.map((img, i) => (
 
@@ -42,7 +43,7 @@ const PropertyList = () => {
 
                   ))
                 }
-              </>
+              </div>
             )}
         </div>
       </div>

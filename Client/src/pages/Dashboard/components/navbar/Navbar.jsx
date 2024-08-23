@@ -5,11 +5,7 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-
-
 const Navbar = () => {
-
-
   return (
     <div className="h-16 border-b border-gray-300 flex items-center text-sm text-gray-500">
       <div className="w-full px-4 flex items-center justify-between">

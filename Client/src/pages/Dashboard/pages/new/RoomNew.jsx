@@ -32,7 +32,7 @@ const RoomNew = ({ inputs, title }) => {
         ...info,
       }
       console.log(newuser)
-     const res = await axios.post("http://localhost:5000/api/auth/Resistor",newuser);
+     const res = await axios.post("https://bookingwebsite-2.onrender.com/api/auth/Resistor",newuser);
      console.log(res.data)
       if (res.data) {
         toast.success("Successfully added.");

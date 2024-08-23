@@ -18,7 +18,7 @@ const Registers = () => {
         console.log({ userName: Name, userEmail: email, password: password })
         dispatch({ type: "AUTH_STAER" })
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/resistor', { userName: Name, userEmail: email, password: password, })
+            const res = await axios.post('https://bookingwebsite-2.onrender.com/api/auth/resistor', { userName: Name, userEmail: email, password: password, })
             const user = res?.data?.user
             console.log(user)
             navigate("/")

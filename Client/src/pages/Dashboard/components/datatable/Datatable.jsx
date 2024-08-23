@@ -8,7 +8,7 @@ const Datatable = ({colums}) => {
   const location = useLocation()
   const path = location.pathname.split("/")[2]
 const [List,setList]=useState([])
-const {data:datas, loading, error, refetch}= useFetch(`http://localhost:5000/api/${path}`)
+const {data:datas, loading, error, refetch}= useFetch(`https://bookingwebsite-2.onrender.com/api/${path}`)
 console.log(datas.isAdmin)
 useEffect(()=>{
   setList(datas)
@@ -16,7 +16,7 @@ useEffect(()=>{
 const handleToggleRole = async (id, currentRole) => {
   try {
     const newRole = !currentRole; // Toggle the role
-    const res = await axios.patch(`http://localhost:5000/api/${path}/admin/${id}`, { isAdmin: newRole });
+    const res = await axios.patch(`https://bookingwebsite-2.onrender.com/api/${path}/admin/${id}`, { isAdmin: newRole });
     setList((prevList) => 
       prevList.map((item) => (item._id === id ? { ...item, isAdmin: newRole } : item))
     );
@@ -28,7 +28,7 @@ const handleToggleRole = async (id, currentRole) => {
 
   const handleDelete = async(id) => {
     try{
-      await axios.delete(`http://localhost:5000/api/${path}/${id}`)
+      await axios.delete(`https://bookingwebsite-2.onrender.com/api/${path}/${id}`)
       setList(List.filter((item) => item._id !== id));
     }catch(err){
       console.log(err.message)

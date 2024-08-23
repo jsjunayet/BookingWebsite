@@ -14,7 +14,7 @@ import { AuthContext } from "../../Context/AuthContext";
 const Reserve = ({ isopen, hoteId, time, price, img, City, RoomName, title }) => {
     const { Dark } = useContext(ThemContext)
     const [selected, setSelected] = useState([]);
-    const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/hotel/room/${hoteId}`);
+    const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/hotel/room/${hoteId}`);
     const { dates } = useContext(SearchContext);
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
@@ -58,7 +58,7 @@ const Reserve = ({ isopen, hoteId, time, price, img, City, RoomName, title }) =>
         try {
             await Promise.all(
                 selected.map((roomId) => {
-                    const res = axios.put(`http://localhost:5000/api/room/avaiable/${roomId}`, {
+                    const res = axios.put(`https://bookingwebsite-2.onrender.com/api/room/avaiable/${roomId}`, {
                         dates: allDates,
                     });
                     return res.data;
@@ -71,7 +71,7 @@ const Reserve = ({ isopen, hoteId, time, price, img, City, RoomName, title }) =>
                 icon: 'success',
                 confirmButtonText: 'OK'
             })
-            const res = await axios.post("http://localhost:5000/api/Booking", BookingData)
+            const res = await axios.post("https://bookingwebsite-2.onrender.com/api/Booking", BookingData)
             navigate("/profile")
 
         } catch (err) { console.log(err) }

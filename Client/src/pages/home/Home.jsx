@@ -10,6 +10,7 @@ import { ThemContext } from "../../Context/ThemContext";
 import Location from "../../components/Location/Location";
 import Feedback from "../../components/feebbacks/feedback/Feedback";
 import Contact from "../../components/Contact/Contact";
+import FeaturedPropertiesSkeleton from "../../components/SkeletonCompent/featurePropertiesSkeleton";
 
 const Home = () => {
   const { Dark } = useContext(ThemContext)

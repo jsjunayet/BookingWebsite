@@ -7,7 +7,7 @@ import useFetch from "../../../../Hook/useFetch";
 import { useEffect, useState } from "react";
 
 const Featured = () => {
-  const { data, loading, error, refetch } = useFetch(`http://localhost:5000/api/Booking`)
+  const { data, loading, error, refetch } = useFetch(`https://bookingwebsite-2.onrender.com/api/Booking`)
   const [salesData, setSalesData] = useState({
     todaySales: 0,
     lastWeekSales: 0,
